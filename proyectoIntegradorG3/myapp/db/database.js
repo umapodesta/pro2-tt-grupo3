@@ -1,4 +1,4 @@
-let patitos = {
+let db = {
     usuarios : {
         nombre : "Nombre del usuario",
         email: "user@mail.com",
