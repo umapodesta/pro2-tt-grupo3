@@ -2,11 +2,11 @@ const db = require ("../db/database");
 
 const patitosControllers = {
     patitos : function (req, res) {
-        return res.render ('patitos', {title: "Product Detail", productos : db.productos})
+        return res.render ('product', {title: "Product Detail", productos : db.productos})
     },
 
     add : function (req, res) {
-        return res.render ('add Product', {title: "Add product", usuarios : db.usuarios})
+        return res.render ('product-add', {title: "Add product", usuarios : db.usuarios})
     }
 }
 
