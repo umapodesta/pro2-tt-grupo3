@@ -18,4 +18,4 @@ const usersControllers = {
     }
 };
 
-module.exports = userControllers;
+module.exports = usersControllers;
