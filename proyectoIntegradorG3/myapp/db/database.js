@@ -161,3 +161,5 @@ let patitos = {
     ]
        
 }
+
+module.exports = db;
