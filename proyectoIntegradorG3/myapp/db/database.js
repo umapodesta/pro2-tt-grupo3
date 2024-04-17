@@ -10,6 +10,7 @@ let db = {
             // Datos del producto 1
             nombre: "Patito policia",
             descripcion: "Pato de hule color amarillo con traje de policia azul. ",
+            imagenProducto: "images/products/patodegomaPolicia.jpeg",
             
 
             comentarios: [
@@ -25,6 +26,7 @@ let db = {
         {   // Datos del producto 2
             nombre: "Patito princesa rosada",
             descripcion: "Pato de hule color rosado con su corona dorada (inspirado en la artista pop argetinta Martina Stoessel - TINI TINI TINI).",
+            imagenProducto: "images/products/Screen Shot 2024-04-17 at 13.16.22.png",
             
 
             comentarios: [
@@ -38,8 +40,9 @@ let db = {
         },
 
         {   //Datos del producto 3
-            nombre: "Pato bombero",
-            descripcion: "Fotografía profesional en tu bolsillo. Descubrí infinitas posibilidades para tus fotos con las 3 cámaras principales de tu equipo. Poné a prueba tu creatividad y jugá con la iluminación, diferentes planos y efectos para obtener grandes resultados.",
+            nombre: "Patito bombero",
+            descripcion: "Pato de hule color amarillo con traje de bombero rojo y gorro negro.",
+            imagenProducto: "images/products/Screen Shot 2024-04-17 at 13.18.28.png",
             
 
             comentarios: [
@@ -53,8 +56,9 @@ let db = {
         },
 
         {   // Datos del producto 4
-            nombre: "Pato Freddy Mercury",
+            nombre: "Patito Freddy Mercury",
             descripcion: "Pato de hule color amarillo del artista Freddy Mercury (incluye microfono y anteojos).",
+            imagenProducto: "images/products/freddymercury.jpeg",
             
 
             comentarios: [
@@ -68,8 +72,9 @@ let db = {
         },
 
         {   // Datos del producto 5
-            nombre: "Pato Hombre Arania",
+            nombre: "Patito Hombre Arania",
             descripcion: "Pato de hule con traje del superheroe Spiderman.",
+            imagenProducto:"images/products/Screen Shot 2024-04-17 at 13.19.49.png",
             
 
             comentarios: [
@@ -83,8 +88,9 @@ let db = {
         },
 
         {   // Datos del producto 6
-            nombre: "Pato Minion",
+            nombre: "Patito Minion",
             descripcion: "Pato de hule color amarillo con traje de minion (incluye guantes y googles).",
+            imagenProducto:"images/products/comprar-patito-goma-minions.jpeg",
             
 
             comentarios: [
@@ -98,8 +104,9 @@ let db = {
         },
 
         {   // Datos del producto 7
-            nombre: "Pato Donald Trump",
+            nombre: "Patito Donald Trump",
             descripcion: "Pato de hule color amarillo del presidente DOnald Trump.",
+            imagenProducto:"images/products/donaldTrump.jpg",
             
 
             comentarios: [
@@ -113,8 +120,9 @@ let db = {
         },
 
         {   // Datos del producto 8
-            nombre: "Pato Toro",
+            nombre: "Patito Toro",
             descripcion: "Pato de hule de toro color negro con cuernos blancos.",
+            imagenProducto: "images/products/patotoro.jpeg",
             
 
             comentarios: [
@@ -128,8 +136,9 @@ let db = {
         },
 
         {   // Datos del producto 9
-            nombre: "Pato Jocker",
+            nombre: "Patito Jocker",
             descripcion: "Pato de hule del villano Joker con traje incluido.",
+            imagenProducto: "images/products/patoJocker.jpg",
             
 
             comentarios: [
@@ -143,8 +152,9 @@ let db = {
         },
 
         {   // Datos del producto 10
-            nombre: "Pato Chewbacca",
+            nombre: "Patito Chewbacca",
             descripcion: "Pato de hule del personaje de la saga de Star Wars Chewbacca color marron.",
+            imagenProducto:"images/products/comprar-patito-goma-chewaka.jpeg",
             
 
             comentarios: [
