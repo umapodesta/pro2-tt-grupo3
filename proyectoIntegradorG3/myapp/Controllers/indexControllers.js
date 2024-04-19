@@ -6,7 +6,7 @@ const indexControllers = {
     },
 
     results : function (req, res) {
-        return res.render ('Search Results', {title: "Search Results", productos: db.productos});
+        return res.render ('searchResults', {title: "Search Results", productos: db.productos});
     }
 }
 
