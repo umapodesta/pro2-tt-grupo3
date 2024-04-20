@@ -46,14 +46,14 @@
 			<% for(let index = 0; index < productos.length; index++) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="product.html">
+						<a href="/users">
 							<figure class="product-box_image">
 								<img src="<%= productos[index].imagenProducto %>" alt="<%= productos[index].nombre %>">
 							</figure>
 							<article class="product-box_data">
 								<h2><%= productos[index].nombre %></h2>
 								<p><%= productos[index].descripcion %></p>
-								<p>Comentarios: <%= productos[index].comentarios %></p>
+								<p><%= productos[index].comentarios[0].descripcion %></p>
 							</article>
 						</a>
 					</section>
