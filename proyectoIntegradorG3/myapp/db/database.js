@@ -15,8 +15,8 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 1
-                    Username: "User1",
-                    descripcion: "Comentario del producto 1",
+                    Username: "brian.123",
+                    descripcion: "Que tan amarillo es el patito?",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
