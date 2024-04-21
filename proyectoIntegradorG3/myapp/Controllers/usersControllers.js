@@ -14,7 +14,7 @@ const usersControllers = {
     },
 
     usersEdit: function (req, res) {
-        return res.render ("profileEdit", {title: "ProfileEdit", usuarios: db.usuarios});
+        return res.render ("usersEdit", {title: "ProfileEdit", usuarios: db.usuarios});
     }
 };
 

@@ -1,6 +1,6 @@
 let db = {
     usuarios : {
-        nombre : "Nombre del usuario",
+        nombre : "Ted Bundy",
         email: "user@mail.com",
         contrasenia: "********"
     },
