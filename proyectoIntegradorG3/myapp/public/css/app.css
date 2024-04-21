@@ -68,7 +68,7 @@ hr {
 /*====== Main Header ======*/
 .main-header {
   padding: 15px 0;
-  background-color: var(--yellow);
+  background-image: url("/images/fondoRosa.png");
 }
 
 .main-header_home-link,
@@ -269,7 +269,7 @@ hr {
 }
 
 .footer-data i {
-  color: var(--light-blue);
+  color: pink;
   font-size: 3.5em;
 }
 
@@ -369,7 +369,7 @@ hr {
 }
 
 .buy-now-button {
-  background-color: var(--light-blue);
+  background-color: pink;
   font-size: 1.6em;
   color: #ffffff;
   padding: 15px;

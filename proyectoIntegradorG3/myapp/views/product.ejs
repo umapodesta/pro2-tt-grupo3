@@ -34,10 +34,9 @@
 					<section class="comments">
 						<% for (let index = 0; index < productos[0].comentarios.length; index++) { %>
                             <article>
-                                <img src="<%= productos[0].comentarios[index].imagenUsuario %>" alt="">
+								<img src=<%=  productos[0].comentarios[index].pfp%> alt="">
                                 <div class="data">
                                     <p class="user">
-                                        <strong><a href="/users/profile"><%= productos[index].comentarios[0].Username %></a></strong>
                                         <%= productos[0].comentarios[index].descripcion %>
                                     </p>
                                 </div>

@@ -8,7 +8,7 @@ let db = {
         
         {
             // Datos del producto 1
-            nombre: "Patito policia",
+            nombre: "Patito Policia",
             descripcion: "Pato de hule color amarillo con traje de policia azul. ",
             imagenProducto: "images/products/patodegomaPolicia.jpeg",
             
@@ -24,9 +24,9 @@ let db = {
         },
 
         {   // Datos del producto 2
-            nombre: "Patito princesa rosada",
+            nombre: "Patito Princesa Rosada",
             descripcion: "Pato de hule color rosado con su corona dorada (inspirado en la artista pop argetinta Martina Stoessel - TINI TINI TINI).",
-            imagenProducto: "images/products/Screen Shot 2024-04-17 at 13.16.22.png",
+            imagenProducto: "images/products/ScreenShot2024-04-17at13.16.22.png",
             
 
             comentarios: [
@@ -40,9 +40,9 @@ let db = {
         },
 
         {   //Datos del producto 3
-            nombre: "Patito bombero",
+            nombre: "Patito Bombero",
             descripcion: "Pato de hule color amarillo con traje de bombero rojo y gorro negro.",
-            imagenProducto: "images/products/Screen Shot 2024-04-17 at 13.18.28.png",
+            imagenProducto: "/images/products/ScreenShot2024-04-17at13.18.28.png",
             
 
             comentarios: [
@@ -72,9 +72,9 @@ let db = {
         },
 
         {   // Datos del producto 5
-            nombre: "Patito Hombre Arania",
+            nombre: "Patito Hombre Araña",
             descripcion: "Pato de hule con traje del superheroe Spiderman.",
-            imagenProducto:"images/products/Screen Shot 2024-04-17 at 13.19.49.png",
+            imagenProducto:"images/products/ScreenShot2024-04-17at13.19.49.png",
             
 
             comentarios: [
