@@ -10,7 +10,7 @@
   --gray: #666666;
   --light-gray: #ebebeb;
   --green: #39b54a;
-  --base-font-family: 'Roboto', sans-serif
+  --base-font-family: "Oswald", sans-serif;
 }
 
 
@@ -180,6 +180,9 @@ hr {
   overflow: hidden;
   transition: 300ms;
   margin: 20px 0;
+  border-bottom: 1px solid var(--light-gray);
+  height: 300px;
+  width: 260px;
 }
 
 .product-box a {
