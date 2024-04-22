@@ -6,7 +6,7 @@ const patitosControllers = {
     },
 
     add : function (req, res) {
-        return res.render ('product-add', {title: "Add product", usuarios : db.usuarios})
+        return res.render ('add-product', {title: "Add product", usuarios : db.usuarios})
     }
 }
 

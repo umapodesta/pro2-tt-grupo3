@@ -5,6 +5,6 @@ const patitosControllers = require("../Controllers/patitosControllers");
 
 /* GET PRODUCTOS */
 router.get('/', patitosControllers.patitos);
-router.get('/addProduct', patitosControllers.add);
+router.get('/add-product', patitosControllers.add);
 
 module.exports = router;
