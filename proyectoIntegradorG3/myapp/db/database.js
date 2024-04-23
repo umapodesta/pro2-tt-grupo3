@@ -2,7 +2,7 @@ let db = {
     usuarios : {
         nombre : "Maria Eugenia",
         apellido: "Martinez",
-        mail: "user@mail.com",
+        mail: "emartinez@mail.com",
         usuario: "Maria_Eugenia",
         contrasenia: "********",
         fechaNacimiento: "8/12/04",
