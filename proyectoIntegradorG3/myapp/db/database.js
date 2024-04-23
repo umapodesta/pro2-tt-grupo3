@@ -7,7 +7,7 @@ let db = {
         contrasenia: "********",
         fechaNacimiento: "8/12/04",
         numeroDocumento: 46567890,
-        foto: "" 
+        foto: "/images/shrek.jpeg" 
     },
     productos: [ 
         
