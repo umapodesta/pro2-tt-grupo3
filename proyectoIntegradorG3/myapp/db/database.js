@@ -1,8 +1,13 @@
 let db = {
     usuarios : {
-        nombre : "Ted Bundy",
-        email: "user@mail.com",
-        contrasenia: "********"
+        nombre : "Maria Eugenia",
+        apellido: "Martinez",
+        mail: "user@mail.com",
+        usuario: "Maria_Eugenia",
+        contrasenia: "********",
+        fechaNacimiento: "8/12/04",
+        numeroDocumento: 46567890,
+        foto: "" 
     },
     productos: [ 
         
@@ -31,8 +36,13 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 2
-                    Username: "User2",
-                    descripcion: "Comentario del producto 2",
+                    Username: "Marga",
+                    descripcion: "Que producto original!",
+                    imagenUsuario: "/public/images/users/defaultImage.png"
+                },
+                {   
+                    Username: "Alan",
+                    descripcion: "Quiero todossss",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
@@ -47,8 +57,18 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 3
-                    Username: "User3",
-                    descripcion: "Comentario del producto 3",
+                    Username: "Rodrigo",
+                    descripcion: "Yo queria meterme en Mercado Libre y mira donde termine",
+                    imagenUsuario: "/public/images/users/defaultImage.png"
+                },
+                {   
+                    Username: "Elena",
+                    descripcion: "Son demasiado chicos",
+                    imagenUsuario: "/public/images/users/defaultImage.png"
+                },
+                {   
+                    Username: "Carla",
+                    descripcion: "En el chino hay mejores",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
@@ -63,8 +83,8 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 4
-                    Username: "User4",
-                    descripcion: "Comentario del producto 4",
+                    Username: "Josefa",
+                    descripcion: "Quack Quack",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
@@ -79,8 +99,13 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 5
-                    Username: "User5",
-                    descripcion: "Comentario del producto 5",
+                    Username: "AndrewGarfield",
+                    descripcion: "Aguante Tom Hollandddd",
+                    imagenUsuario: "/public/images/users/defaultImage.png"
+                },
+                {   
+                    Username: "Tobey",
+                    descripcion: "Prefiero el spiderman original...",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
@@ -95,8 +120,8 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 6
-                    Username: "User6",
-                    descripcion: "Comentario del producto 6",
+                    Username: "Gru",
+                    descripcion: "Quien quiere ir a la lunaaaa?",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
@@ -111,8 +136,8 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 7
-                    Username: "User7",
-                    descripcion: "Comentario del producto 7",
+                    Username: "JoeBiden",
+                    descripcion: "Yo tambien quiero un pato con mi nombre :(",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
@@ -127,8 +152,8 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 8
-                    Username: "User8",
-                    descripcion: "Comentario del producto 8",
+                    Username: "Amelia",
+                    descripcion: "Torero, poner el alma en el ruedo",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
@@ -143,8 +168,8 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 9
-                    Username: "User9",
-                    descripcion: "Comentario del producto 9",
+                    Username: "HarleyQueen",
+                    descripcion: "AAAAAAAAAAAA quiero todos YA, mi puddin",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
                 
@@ -159,10 +184,16 @@ let db = {
 
             comentarios: [
                 {   // Comentarios del producto 10
-                    Username: "User10",
-                    descripcion: "Comentario del producto 10",
+                    Username: "Padme",
+                    descripcion: "No hay uno de Anakin? Digo, para tirarlo a la lava",
                     imagenUsuario: "/public/images/users/defaultImage.png"
                 },
+                {   
+                    Username: "r2d2",
+                    descripcion: "Yo quiero uno de citripio ",
+                    imagenUsuario: "/public/images/users/defaultImage.png"
+                },
+                
                 
             ]
         }
