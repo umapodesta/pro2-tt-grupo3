@@ -33,7 +33,7 @@ module.exports = function (sequelize, dataTypes) {
         foto: {
             type: dataTypes.STRING
         },
-        createAt: {
+        createdAt: {
             type: dataTypes.DATE
         },
         updatedAt: {
@@ -47,7 +47,7 @@ module.exports = function (sequelize, dataTypes) {
 
     let config = {
         tableName: "usuarios",
-        timestamps:false,
+        timestamps:true,
         underscored: false
     };
 

@@ -1,5 +1,3 @@
-
-
 const db = require ("../database/models");
 
 const usersControllers = {
@@ -14,7 +12,11 @@ const usersControllers = {
 
     profile: function (req, res) {
        /* return res.render ("profile", {title: "profile", usuarios: db.usuarios, productos: db.productos}); */
-        let usuario;
+       db.Usuario.findAll()
+       .then(function(result){
+
+       })
+       let usuario;
         let productos;
 
        db.Usuario.findOne()
@@ -41,6 +43,16 @@ const usersControllers = {
         .catch(function(respuestaNegativa){
             console.log(respuestaNegativa);
         }); 
+    },
+    users: function (req,res) {
+        db.Usuario.findAll()
+        .then(function (result) {
+            return res.send(result)
+            
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
     }
 };
 
