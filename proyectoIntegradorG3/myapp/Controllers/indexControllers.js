@@ -1,7 +1,10 @@
-const db = require ("../db/database");
+const db = require ("../database/models");
 
 const indexControllers = {
     index : function (req, res) {
+
+        
+
         return res.render ('index', {title: "Index", productos: db.productos});
     },
 
