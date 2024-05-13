@@ -1,24 +1,19 @@
-const db = require ("../db/database");
+const db = require ("../database/models");
 
 const patitosControllers = {
     patitos : function (req, res) {
        /* return res.render ('product', {title: "Product Detail", productos : db.productos})*/
 
-       let comentarios;
-       let productos;
-       db.Patitos.findOne()
-       .then(function(results){
-           productos = results;
-           return db.Comentarios.findAll({
-               limit: 5,
-           });
+       db.Patitos.findAll() //no va findOne?
+       .then(function(result){
+          return res.send(result)
        })
        .then(function(results){
-           comentarios = results;
-           return res.render('product', {title:"Product Detail", productos: productos, comentarios: comentarios});
+           
+           //return res.render('product', {title:"Product Detail", productos: productos, comentarios: comentarios});
        })
        .catch(function(respuestaNegativa){
-           console.log(respuestaNegativa);
+          return console.log(respuestaNegativa);
        });
     },
 
