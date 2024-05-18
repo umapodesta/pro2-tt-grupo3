@@ -26,7 +26,18 @@ const patitosControllers = {
         .catch(function(respuestaNegativa){
             console.log(respuestaNegativa);
         });
-    }
+    },
+    detalle: function(req, res) {
+        let idPatitos = req.params.idPatitos;
+  
+        db.Patitos.findByPk(idPatitos)
+        .then((result) => {
+          return res.render("detallePatitos", {Patitos: result});
+        }).catch((err) => {
+          return console.log(err);
+        });
+      }
+
 }
 
 module.exports = patitosControllers;

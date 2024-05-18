@@ -7,4 +7,6 @@ const patitosControllers = require("../Controllers/patitosControllers");
 router.get('/', patitosControllers.patitos);
 router.get('/add-product', patitosControllers.add);
 
+/* GET details movie page. */
+router.get('/id/:idPatito', patitosController.detalle);
 module.exports = router;
