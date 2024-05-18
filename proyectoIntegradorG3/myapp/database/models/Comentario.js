@@ -15,7 +15,7 @@ module.exports = function (sequelize, dataTypes) {
         texto: {
             type: dataTypes.STRING(400)
         },
-        createAt: {
+        createdAt: {
             type: dataTypes.DATE
         },
         updatedAt: {
@@ -28,7 +28,7 @@ module.exports = function (sequelize, dataTypes) {
     };
 
     let config = {
-        tableName: "Comentarios",
+        tableName: "comentarios",
         timestamps:true,
         underscored: false
     };
