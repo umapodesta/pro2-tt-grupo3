@@ -8,5 +8,5 @@ router.get('/', patitosControllers.patitos);
 router.get('/add-product', patitosControllers.add);
 
 /* GET details movie page. */
-router.get('/id/:idPatito', patitosController.detalle);
-module.exports = router;
+router.get('/id/:idPatitos', patitosControllers.detalle); 
+module.exports = router; 

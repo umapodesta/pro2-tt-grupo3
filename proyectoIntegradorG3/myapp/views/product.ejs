@@ -11,7 +11,7 @@
 	<%- include('./partials/header') %>
 
 	<!-- product detail -->
-	<div class="container products-wrapper">
+	 <div class="container products-wrapper">
 		
 			<div class="d-flex align-items-center">
 				<h2 class="products-title"><%= productos[0].nombre %></h2> 
@@ -44,8 +44,10 @@
 
 
 
-						<% } %>
-					</section>
+						<% } %> 
+					</section> 
+
+				
 					<form class="form" action="/patitos" method="get">
 						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
