@@ -39,16 +39,16 @@ CREATE TABLE IF NOT EXISTS productos (
 	FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 );
 
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 1, "Patito policia", "pato1.png", "Pato de hule color amarillo con traje de policia azul.");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 2, "Patito princesa rosada", "pato2.png", "Pato de hule color rosado con su corona dorada (inspirado en la artista pop argetinta Martina Stoessel - TINI TINI TINI).");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 3, "Patito bombero", "pato3.png", "Pato de hule amarillo con traje de bombero color negro (incluye manguera y pequeño gorro).");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 4, "Patito Freddy Mercury", "pato4.png", "Pato de hule color amarillo del artista Freddy Mercury (incluye microfono y anteojos).");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 5, "Patito Hombre Arania", "pato5.png", "Pato de hule con traje del superheroe Spiderman.");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 1, "Patito minion", "pato6.png", "Pato de hule color amarillo con traje de minion (incluye guantes y googles).");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 2, "Patito Donald Trump", "pato7.png", "Pato de hule color amarillo del presidente Donald Trump.");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 3, "Patito toro", "pato8.png", "Pato de hule de toro color negro con cuernos blancos.");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 4, "Patito Joker", "pato9.png", "Pato de hule del villano Joker con traje incluido.");
-INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 5, "Patito Chewbacca", "pato10.png", "Pato de hule del personaje de la saga de Star Wars Chewbacca color marron.");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 1, "Patito policia", "Patito policia", "Pato de hule color amarillo con traje de policia azul.");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 2, "Patito princesa rosada", "Patito princesa rosada", "Pato de hule color rosado con su corona dorada (inspirado en la artista pop argetinta Martina Stoessel - TINI TINI TINI).");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 3, "Patito bombero", "Patito bombero", "Pato de hule amarillo con traje de bombero color negro (incluye manguera y pequeño gorro).");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 4, "Patito Freddy Mercury", "Patito Freddy Mercury", "Pato de hule color amarillo del artista Freddy Mercury (incluye microfono y anteojos).");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 5, "proyectoIntegradorG3/myapp/public/images/products/ScreenShot2024-04-17at13.19.49.png", "Patito Hombre Araña", "Pato de hule con traje del superheroe Spiderman.");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 1, "Patito minion", "Patito Minion", "Pato de hule color amarillo con traje de minion (incluye guantes y googles).");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 2, "Patito Donald Trump", "Patito Donald Trump", "Pato de hule color amarillo del presidente Donald Trump.");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 3, "Patito toro", "Patito toro", "Pato de hule de toro color negro con cuernos blancos.");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 4, "Patito Joker", "Patito Jocker", "Pato de hule del villano Joker con traje incluido.");
+INSERT INTO productos (id, idUsuario, foto, producto, descripcion) VALUES (default, 5, "proyectoIntegradorG3/myapp/public/images/products/comprar-patito-goma-chewaka.jpeg", "Patito Chewbacca", "Pato de hule del personaje de la saga de Star Wars Chewbacca color marron.");
 /* ***** LUNES *****	SQL para Insertar registros 
 NOTA: SI NO PUEDES INSERTAR ESTE REGISTRO POR MOTIVO DEL SAVE MODE O EL MODO SEGURO
 EDIT -> PREFERENCES -> SQL EDITOR -> SAVE UPDATE = OFF*/
