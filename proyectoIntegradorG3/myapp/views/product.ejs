@@ -14,7 +14,7 @@
 	 <div class="container products-wrapper">
 		
 			<div class="d-flex align-items-center">
-				<h2 class="products-title"><%= productos[0].nombre %></h2> 
+				<h2 class="products-title"><%= productos.nombre %></h2> 
 				<p class="product-detail-description">
 					<a href="/patitos/add-product">Editar</a>
 				</p>
@@ -24,20 +24,20 @@
 			<div class="row">
 				
 					<article class="col-12 col-lg-8 product-detail-info">
-						<img src="<%= productos[0].imagenProducto%>" alt="" class="product-detail-img">
-						<p class="product-detail-description"><%= productos[0].descripcion%></p>
+						<img src="<%= productos.producto%>" alt="" class="product-detail-img">
+						<p class="product-detail-description"><%= productos.descripcion%></p>
 					</article>
 				
 
 				
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<% for (let index = 0; index < productos[0].comentarios.length; index++) { %>
+						<% for (let index = 0; index < 4; index++) { %>
                             <article>
-								<img src=<%=  productos[0].comentarios[index].pfp%> alt="">
+								<img src=<%=  productos%> alt="">
                                 <div class="data">
                                     <p class="user">
-                                        <%= productos[0].comentarios[index].descripcion %>
+                                        test
                                     </p>
                                 </div>
                             </article>

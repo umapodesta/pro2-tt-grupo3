@@ -32,7 +32,7 @@ const patitosControllers = {
   
         db.Patitos.findByPk(idPatitos)
         .then((result) => {
-          return res.render("detallePatitos", {Patitos: result});
+          return res.render("product", {productos: result});
         }).catch((err) => {
           return console.log(err);
         });
