@@ -16,32 +16,39 @@
 				<h2 class="products-title">Registrate</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<form class="formRegister" action="/users" method="get">
-
+			<form class="formRegister" action="/users/register" method="post">
+				<label class="form-label">
+					Nombre
+				</label>
+				<input class="form-input" type="nombre" name="nombre" id="nombre" required>
+				<label class="form-label">
+					Apellido
+				</label>
+				<input class="form-input" type="apellido" name="apellido" id="apellido" required>
 				<label class="form-label">
 					Email
 				</label>
-				<input class="form-input" type="email" name="email" id="email" required>
+				<input class="form-input" type="email" name="mail" id="email" required>
 
 				<label class="form-label">
 					Usuario
 				</label>
-				<input class="form-input" type="text" name="username" id="username" required>
+				<input class="form-input" type="text" name="usuario" id="username" required>
 
 				<label class="form-label">
 					Contraseña
 				</label>
-				<input class="form-input" type="password" name="password" id="password" required>
+				<input class="form-input" type="password" name="contrasenia" id="password" required>
 
 				<label class="form-label">
 					Fecha de nacimiento
 				</label>
-				<input class="form-input" type="date" name="nacimiento" id="nacimiento" required>
+				<input class="form-input" type="date" name="fechaNacimiento" id="nacimiento" required>
 
 				<label class="form-label">
 					Número de documento
 				</label>
-				<input class="form-input" type="number" name="dni" id="dni" required>
+				<input class="form-input" type="number" name="numeroDocumento" id="dni" required>
 
 				<label class="form-label">
 					Foto de perfil

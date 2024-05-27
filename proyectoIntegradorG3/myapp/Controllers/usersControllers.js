@@ -5,10 +5,47 @@ const usersControllers = {
         return res.render ("login", {title: "Login"}); 
         
     },
+    loginPost: function (req, res) {
+        let form = req.body;
+        let filtro = {
+            where: [
+                {
+                    mail: form.mail
+                }
+            ]
+        }
+      
+        db.Usuario.findOne(filtro)
+        .then(function (result) {
+            
+            let usuario =result
+            if (usuario.contrasenia == form.contrasenia) {
+                return res.redirect("/");  
+            }
+            else{
+                return res.redirect("/users/login")
+            }
+        })
+        .catch(err=>console.log(err))
+        
+    },
+
 
     register: function (req, res) {
         return res.render ("register", {title: "register"});
     },
+    registerPost: function (req, res) {
+        let form = req.body; 
+       // return res.send(form)
+        db.Usuario.create(form)
+      .then((form) => {
+          return res.redirect("/")
+      }).catch((err) => {
+        return console.log(err);
+      });
+        
+    },
+
 
     profile: function (req, res) {
        /* return res.render ("profile", {title: "profile", usuarios: db.usuarios, productos: db.productos}); */
@@ -53,6 +90,9 @@ const usersControllers = {
         .catch(function (err) {
             console.log(err);
         })
+    },
+    store: function(req, res){
+        console.log(req.body);
     }
 };
 

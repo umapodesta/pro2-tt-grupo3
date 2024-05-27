@@ -10,3 +10,4 @@ router.get('/add-product', patitosControllers.add);
 /* GET details movie page. */
 router.get('/id/:idPatitos', patitosControllers.detalle); 
 module.exports = router; 
+
