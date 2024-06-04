@@ -1,5 +1,5 @@
 module.exports = function (sequelize, dataTypes) {
-    let alias = "Comentarios";
+    let alias = "Comentario";
     let cols = {
         id: {
             autoIncrement: true,
@@ -34,6 +34,23 @@ module.exports = function (sequelize, dataTypes) {
     };
 
     let Comentario = sequelize.define(alias, cols, config);
+
+
+    Comentario.associate = function(models) {
+        Comentario.belongsTo(models.Patito, {
+            as: "patitos",
+            foreignKey: "idProducto"
+        });
+    };
+    
+   // Comentario.associate = function (models) {
+     //   Comentario.hasMany(models.Patito , {
+       //     as: "patitos",
+         //   foreignKey: "idUsuario"
+        //});
+
+    
+   //};
 
     return Comentario;
 };

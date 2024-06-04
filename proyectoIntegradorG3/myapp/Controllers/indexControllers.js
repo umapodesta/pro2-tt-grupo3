@@ -5,7 +5,11 @@ const indexControllers = {
         
         /*let id = req.params.id; */
 
-        db.Comentarios.findAll() //no va findOne?
+        db.Patito.findAll({
+            include: [{association: "usuario"}, 
+            {association: "comentario"}
+        ]
+           })
         .then(function(result){
            return res.send(result)
         })

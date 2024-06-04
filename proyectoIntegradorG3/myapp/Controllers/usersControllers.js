@@ -59,7 +59,7 @@ const usersControllers = {
        db.Usuario.findOne()
             .then(function(results){
                 usuario = results; 
-                return db.Patitos.findAll(); 
+                return db.Patito.findAll(); 
             })
             .then(function(results){
                 productos = results;

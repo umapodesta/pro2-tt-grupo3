@@ -1,5 +1,5 @@
 module.exports = function (sequelize, dataTypes) {
-    let alias = "Patitos";
+    let alias = "Patito";
     let cols = {
         id: {
             autoIncrement: true,
@@ -37,6 +37,29 @@ module.exports = function (sequelize, dataTypes) {
     };
 
     let Patito = sequelize.define(alias, cols, config);
+
+    Patito.associate = function (models) {
+        Patito.belongsTo(models.Usuario , {
+            as: "usuario",
+            foreignKey: "idUsuario"
+        });
+
+        Patito.hasMany(models.Comentario, {
+            as: "comentario",
+            foreignKey: "idProducto"
+        });
+
+     };
+
+    // Patito.associate = function (models) {
+      //  Patito.belongsTo(models.Comentario , {
+        //    as: "comentario",
+          //  foreignKey: "idUsuario" //Según luis se pone el id del usuario
+
+        //});
+
+     //};
+
 
     return Patito;
 };

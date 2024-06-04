@@ -4,14 +4,15 @@ const patitosControllers = {
     patitos : function (req, res) {
        /* return res.render ('product', {title: "Product Detail", productos : db.productos})*/
 
-       db.Patitos.findAll() //no va findOne?
+       db.Patito.findAll({
+        include: [{association: "usuario"}, 
+        {association: "comentario"}
+      ] //Creo que esta línea no afecta en nada y es mejor sacarla(ya está el include en index)
+       })
        .then(function(result){
           return res.send(result)
        })
-       .then(function(results){
-           
-           //return res.render('product', {title:"Product Detail", productos: productos, comentarios: comentarios});
-       })
+
        .catch(function(respuestaNegativa){
           return console.log(respuestaNegativa);
        });
@@ -30,7 +31,7 @@ const patitosControllers = {
     detalle: function(req, res) {
         let idPatitos = req.params.idPatitos;
   
-        db.Patitos.findByPk(idPatitos)
+        db.Patito.findByPk(idPatitos)
         .then((result) => {
           return res.render("product", {productos: result});
         }).catch((err) => {
