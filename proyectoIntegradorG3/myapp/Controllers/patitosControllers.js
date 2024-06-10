@@ -10,7 +10,8 @@ const patitosControllers = {
       ] //Creo que esta línea no afecta en nada y es mejor sacarla(ya está el include en index)
        })
        .then(function(result){
-          return res.send(result)
+          return res.render("product", {productos: result})
+          //return res.send(result)
        })
 
        .catch(function(respuestaNegativa){

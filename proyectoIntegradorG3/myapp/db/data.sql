@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS dbProyectoooo;
+CREATE DATABASE IF NOT EXISTS dbProyecto;
 
-USE dbProyectoooo;
+USE dbProyecto;
 
 CREATE TABLE IF NOT EXISTS usuarios(
 /* 	nombreColumna 		tipoDato 		Restricciones */

@@ -11,7 +11,8 @@ const indexControllers = {
         ]
            })
         .then(function(result){
-           return res.send(result)
+            return res.render("index", {productos: result})
+            return res.send(result)
         })
         .then(function(results){
             
