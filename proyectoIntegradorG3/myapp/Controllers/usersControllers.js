@@ -20,6 +20,7 @@ const usersControllers = {
             
             let usuario =result
             if (usuario.contrasenia == form.contrasenia) {
+
                 return res.redirect("/");  
             }
             else{
@@ -93,7 +94,13 @@ const usersControllers = {
     },
     store: function(req, res){
         console.log(req.body);
+    },
+
+    logout: function(req, res){ // Falta una linea que es la cookie, pero hasta no crear la session, ni la linea de la cookie ni el logout va andar, pero no comento lo de logout porque no rompe nada. 
+        req.session.detroy( );
+        return red.redirect("/login");
     }
+    
 };
 
 module.exports = usersControllers;
