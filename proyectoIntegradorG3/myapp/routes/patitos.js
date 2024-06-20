@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
 const patitosControllers = require("../Controllers/patitosControllers");
+const bcrypt = require("bcryptjs");
 
 /* GET PRODUCTOS */
 router.get('/', patitosControllers.patitos);

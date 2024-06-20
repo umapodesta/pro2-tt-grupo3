@@ -3,6 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
+const { body, validationResult } = require('express-validator'); // Importamos express-validator
+const db = require("./database/models")
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -18,8 +21,44 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+// Configura la sesión
+app.use(session({
+  secret: 'Nuestro mensaje secreto',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true } // Asegúrate de ajustar esto según tus necesidades
+}));
+
+app.use(function (req, res, next) {
+  if (req.session.usuario != undefined){
+    res.locals.usuario = req.session.usuario
+  }
+  return next()
+})
+
+app.use(function(req, res, next){
+  if (req.cookies.userId != undefined && req.session.usuario == undefined) {
+    let id = req.cookies.userId;
+
+    db.Usuario.findbyPk(id)
+    .then(function(usuario){
+
+      req.session.usuario = usuario;
+      res.locals.usuario = ususario;
+
+      return next();
+    })
+    .catch(function (error) {
+      return console.log(error)
+    });
+  }
+  else {
+    return next()
+  }
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
