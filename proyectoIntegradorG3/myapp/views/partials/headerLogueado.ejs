@@ -34,8 +34,9 @@
 	
 				<div class="col-12 col-md-4">
 					<a class="main-header_credit-link">
-						<i class="fas fa-hand-holding-usd"></i>
-						Todas las opiniones en un solo lugar.
+						<!-- <i class="fas fa-hand-holding-usd"></i> -->
+						<!--Todas las opiniones en un solo lugar.-->
+						¡Qué bueno tenerte de nuevo, <strong><%= locals.usuario.usuario %></strong>!
 					</a>
 				</div>
 			</div>
@@ -53,11 +54,11 @@
 	
 				<ul class="right-navbar">
 					<li><a href="/users/profile">
-							Nombre del usuario <i class="fas fa-user"></i>
+							Mi perfil <i class="fas fa-user"></i>
 						</a>
 					</li>
 					<li>
-						<form action="/users/login" method="get">
+						<form action="/users/logout" method="POST">
 							<button class="logout" type="submit">
 								Cerrar sesión <i class="fas fa-sign-in-alt"></i>
 							</button>

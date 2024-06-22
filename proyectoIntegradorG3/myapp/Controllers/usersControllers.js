@@ -30,7 +30,7 @@ const usersControllers = {
             bcrypt.compareSync(form.contrasenia, usuario.contrasenia)
           ) {
             req.session.usuario = usuario;
-            if (req.body.recordar) {
+            if (form.recordar != undefined) { //en el lugar de form antes habia un req.body
               res.cookie("userId", usuario.id, { maxAge: 1000 * 60 * 60 * 24 });
             }
             return res.redirect("/");
@@ -135,6 +135,20 @@ const usersControllers = {
     store: function(req, res){
       let form = req.body;
       let errors = validationResult(req);
+    },
+
+    logout: function(req, res){ 
+        req.session.destroy(function(err) {
+            if (err) {
+                console.log('err');
+            } else {
+                res.clearCookie("userId");
+                return res.redirect ("/users/login")
+                
+            }
+
+        
+        });
     }
 };
 

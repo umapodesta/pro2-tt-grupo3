@@ -29,13 +29,13 @@ app.use(session({
   secret: 'Nuestro mensaje secreto',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true } // Asegúrate de ajustar esto según tus necesidades
+ // cookie: { secure: true } // Asegúrate de ajustar esto según tus necesidades
 }));
 
 app.use(function (req, res, next) {
   if (req.session.usuario != undefined){
     res.locals.usuario = req.session.usuario
-  }
+  }   
   return next()
 })
 
@@ -43,11 +43,11 @@ app.use(function(req, res, next){
   if (req.cookies.userId != undefined && req.session.usuario == undefined) {
     let id = req.cookies.userId;
 
-    db.Usuario.findbyPk(id)
+    db.Usuario.findByPk(id)
     .then(function(usuario){
 
       req.session.usuario = usuario;
-      res.locals.usuario = ususario;
+      res.locals.usuario = usuario;
 
       return next();
     })

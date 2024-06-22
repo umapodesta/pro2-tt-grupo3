@@ -75,6 +75,6 @@ router.get("/register", usersControllers.register);
 router.post("/register", validationsRegister, usersControllers.registerPost);
 router.get("/profile", usersControllers.profile);
 router.get("/usersEdit", usersControllers.usersEdit);
-//router.post('/logout', usersControllers.logout);
+router.post('/logout', usersControllers.logout);
 
 module.exports = router;
