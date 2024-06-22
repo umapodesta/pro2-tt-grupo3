@@ -2,11 +2,11 @@ const db = require ("../database/models");
 const op = db.Sequelize.Op;
 const bcrypt = require("bcryptjs");
 const { validationResult } = require('express-validator');
-//const { update } = require('./patitosControllers');
+const { update } = require('./patitosControllers');
 const usersControllers = {
     login: function (req, res) {
-        if (req.session.usuario) {
-          return res.redirect("/" * req.session.usuario.id);
+        if (req.session.usuario != undefined) {
+          return res.redirect("/" + req.session.usuario.id);
         }
         return res.render ("login", {title: "Login"}); 
         
@@ -42,15 +42,17 @@ const usersControllers = {
       }
       else {
         //Si hay errores, volvemos al formulario con los mensajes
-        res.render("loginPost", {errors: errors.mapped(), old: req.body});
+        res.render("login", {errors: errors.mapped(), old: req.body});
       }      
     },
 
     register: function(req, res) {
-        if (req.session.usuario) {
-            return res.redirect("/profile");
+        if (req.session.usuario != undefined) {
+            return res.redirect("/users/profile" + req.session.usuario.id);
           }
-        return res.render ("register", {title: "register"});
+        else{        
+          return res.render ("register", {title: "register"});
+        };
     },
 
     registerPost: function (req, res) {
@@ -68,7 +70,7 @@ const usersControllers = {
           }
           db.Usuario.create(newUser)
           .then((form) => {
-            req.session.usuario = form;
+            //req.session.usuario = form;
             return res.redirect("/users/login");
           })
           .catch((err) => {
@@ -76,7 +78,7 @@ const usersControllers = {
           });
         }
         else{
-          return res.render("register", {title: "register", errors: errors.mapped(), old: req.body})
+          return res.render("register", {title: "register", errors: errors.mapped(), old: req.body});
         }
       },
 

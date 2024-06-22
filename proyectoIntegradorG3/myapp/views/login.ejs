@@ -22,10 +22,19 @@
 				</label>
 				<input class="form-input" type="email" name="mail" id="email" required>
 
+				<% if (locals.errors && errors.mail) { %>
+                    <div class="error"><%= errors.mail.msg %></div>
+                <% } %>
+
 				<label class="form-label">
 					Contraseña
 				</label>
 				<input class="form-input" type="password" name="contrasenia" id="password" minlength='4' required>
+				
+				<% if (locals.errors && errors.contrasenia) { %>
+                    <div class="error"><%= errors.contrasenia.msg %></div>
+                <% } %>
+
 				<label class="form-label">
 					Recordarme
 				</label>
