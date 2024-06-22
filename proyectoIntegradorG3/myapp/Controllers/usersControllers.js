@@ -2,11 +2,11 @@ const db = require ("../database/models");
 const op = db.Sequelize.Op;
 const bcrypt = require("bcryptjs");
 const { validationResult } = require('express-validator');
-const { update } = require('./patitosControllers');
+//const { update } = require('./patitosControllers');
 const usersControllers = {
     login: function (req, res) {
-        if (req.session.usuario != undefined) {
-          return res.redirect("/" + req.session.usuario.id);
+        if (req.session.usuario) {
+          return res.redirect("/" * req.session.usuario.id);
         }
         return res.render ("login", {title: "Login"}); 
         
@@ -30,7 +30,7 @@ const usersControllers = {
             bcrypt.compareSync(form.contrasenia, usuario.contrasenia)
           ) {
             req.session.usuario = usuario;
-            if (form.recordar != undefined) { //en el lugar de form antes habia un req.body
+            if (req.body.recordar) {
               res.cookie("userId", usuario.id, { maxAge: 1000 * 60 * 60 * 24 });
             }
             return res.redirect("/");
@@ -42,17 +42,15 @@ const usersControllers = {
       }
       else {
         //Si hay errores, volvemos al formulario con los mensajes
-        res.render("login", {errors: errors.mapped(), old: req.body});
+        res.render("loginPost", {errors: errors.mapped(), old: req.body});
       }      
     },
 
     register: function(req, res) {
-        if (req.session.usuario != undefined) {
-            return res.redirect("/users/profile" + req.session.usuario.id);
+        if (req.session.usuario) {
+            return res.redirect("/profile");
           }
-        else{        
-          return res.render ("register", {title: "register"});
-        };
+        return res.render ("register", {title: "register"});
     },
 
     registerPost: function (req, res) {
@@ -70,7 +68,7 @@ const usersControllers = {
           }
           db.Usuario.create(newUser)
           .then((form) => {
-            //req.session.usuario = form;
+            req.session.usuario = form;
             return res.redirect("/users/login");
           })
           .catch((err) => {
@@ -78,7 +76,7 @@ const usersControllers = {
           });
         }
         else{
-          return res.render("register", {title: "register", errors: errors.mapped(), old: req.body});
+          return res.render("register", {title: "register", errors: errors.mapped(), old: req.body})
         }
       },
 
@@ -135,20 +133,6 @@ const usersControllers = {
     store: function(req, res){
       let form = req.body;
       let errors = validationResult(req);
-    },
-
-    logout: function(req, res){ 
-        req.session.destroy(function(err) {
-            if (err) {
-                console.log('err');
-            } else {
-                res.clearCookie("userId");
-                return res.redirect ("/users/login")
-                
-            }
-
-        
-        });
     }
 };
 

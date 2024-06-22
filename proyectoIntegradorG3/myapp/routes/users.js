@@ -8,10 +8,10 @@ const usersControllers = require("../Controllers/usersControllers");
 
 let validationsLogin = [
     body('mail')
-    .notEmpty().withMessage('Debes completar el mail.').bail()
-    .isEmail().withMessage('Debe ser un email valido').bail()
-    .custom(function(value, {req}){
-            return db.Usuario.findOne({where: { mail: req.body.mail },})
+        .notEmpty().withMessage('Debes completar el mail.').bail()
+        .isEmail().withMessage('Debe ser un email valido').bail()
+        .custom(function(value, {req}){
+            return db.Usuario.findOne({where: { mail: req.body.email },})
                   .then(function(user){
                         if(user != undefined){ 
                             return true;
@@ -23,13 +23,14 @@ let validationsLogin = [
        }),
 
     body('contrasenia')
-    .notEmpty().withMessage('Debes completar la contraseña.').bail()
-    .custom(function(value, {req}){
-            return db.Usuario.findOne({where: { mail: req.body.mail },})
+        .notEmpty().withMessage('Debes completar la contraseña.').bail()
+        .custom(function(value, {req}){
+
+            return db.Usuario.findOne({where: { mail: req.body.email },})
                   .then(function(result){
                         if(result != undefined){ 
 
-                            let check = bcrypt.compareSync(req.body.contrasenia, result.contrasenia);
+                            let check = bcrypt.compareSync(req.body.password, result.contrasenia);
                             if(!check){
                                 throw new Error ('La contraseña es incorrecta')
                             }
@@ -70,11 +71,10 @@ let validationsRegister = [
 /* GET INFO */
 router.get("/", usersControllers.users);
 router.get("/login", usersControllers.login);
-router.post("/login", validationsLogin, usersControllers.loginPost);
+router.post("/login", usersControllers.loginPost);
 router.get("/register", usersControllers.register);
-router.post("/register", validationsRegister, usersControllers.registerPost);
+router.post("/register", usersControllers.registerPost);
 router.get("/profile", usersControllers.profile);
 router.get("/usersEdit", usersControllers.usersEdit);
-router.post('/logout', usersControllers.logout);
 
 module.exports = router;

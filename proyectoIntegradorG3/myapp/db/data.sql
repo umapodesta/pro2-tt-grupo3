@@ -103,11 +103,4 @@ INSERT INTO comentarios (id, idUsuario, idProducto, texto) VALUES (default, 4, 9
 INSERT INTO comentarios (id, idUsuario, idProducto, texto) VALUES (default, 5, 10, "comentario 1 al producto 10");
 INSERT INTO comentarios (id, idUsuario, idProducto, texto) VALUES (default, 2, 10, "comentario 2 al producto 10");
 INSERT INTO comentarios (id, idUsuario, idProducto, texto) VALUES (default, 3, 10, "comentario 3 al producto 10");
-
-
-
-
-
-
-
 	
