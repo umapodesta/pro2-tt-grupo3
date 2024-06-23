@@ -41,6 +41,10 @@ module.exports = function (sequelize, dataTypes) {
             as: "patitos",
             foreignKey: "idProducto"
         });
+        Comentario.belongsTo(models.Usuario, {
+            as: "usuarios",
+            foreignKey: "idUsuario",
+          });
     };
     
    // Comentario.associate = function (models) {
