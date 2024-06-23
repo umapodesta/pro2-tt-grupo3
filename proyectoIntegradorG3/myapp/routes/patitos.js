@@ -5,11 +5,11 @@ const { body } = require('express-validator');
 
 // Validaciones para agregar producto
 let validationsAdd = [
-    body('product')
+    body('producto')
         .notEmpty().withMessage('Este campo es obligatorio.'),
     body('descripcion') // Ajustado: coincidir con el nombre correcto del campo
         .notEmpty().withMessage('Es obligatoria una descripción.'),
-    body('image')
+    body('foto')
         .notEmpty().withMessage('Se necesita una imagen del producto.').bail()
         .isURL().withMessage('La imagen debe ser una URL válida.')
 ];

@@ -70,21 +70,40 @@ const patitosControllers = {
     },
 
     store: function(req, res){
-        let form = req.body;
-        let errors = validationResult(req);
-        if(errors.isEmpty()){
-            db.Patito.create(form)
-            .then((result) => {
-                return res.redirect("/patitos/id/" + result.id); // Corregido: redirigir al detalle del producto creado
-            })
-            .catch((err) => {
-                console.log(err);
-                return res.status(500).send("Error interno del servidor");
-            });
-        } else {
-            return res.render("add-product", {title: "Add Product", errors: errors.mapped(), old: req.body });
-        }
-    }
+      let idUsuario = null; // Por defecto, idUsuario es null
+
+      if (req.session.usuario && req.session.usuario.id) {
+          idUsuario = req.session.usuario.id; // Si existe req.session.usuario, asignamos su id a idUsuario
+      }
+
+      let form = {
+          producto: req.body.producto,
+          descripcion: req.body.descripcion,
+          foto: req.body.foto, // Aquí se obtiene el nombre del archivo de la imagen
+          idUsuario: idUsuario // Ajusta esto según cómo estés manejando el usuario en sesión
+      };
+
+      let errors = validationResult(req);
+      if(errors.isEmpty()){
+          db.Patito.create(form)
+              .then((result) => {
+                  return res.redirect("/patitos/id/" + result.id); // Redirigir al detalle del producto creado
+              })
+              .catch((err) => {
+                  console.log(err);
+                  return res.status(500).send("Error interno del servidor");
+              });
+      } else {
+          db.Usuario.findOne()
+              .then(function(results){
+                  return res.render("add-product", {title: "Add Product", usuario: results, errors: errors.mapped(), old: req.body });
+              })
+              .catch(function(err){
+                  console.log(err);
+                  return res.status(500).send("Error interno del servidor");
+              });
+      }
+  }
 };
 
 module.exports = patitosControllers;

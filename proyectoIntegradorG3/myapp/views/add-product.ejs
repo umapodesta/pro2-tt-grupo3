@@ -1,59 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
 
 <%- include('./partials/head') %>
 
 <body>
-    <!-- Header -->
     <% if (locals.usuario) { %>
         <%- include('./partials/headerLogueado') %>
     <% } else { %>
         <%- include('./partials/header') %>
     <% } %>
-    <!-- /Header -->
 
-    <!-- Novedades -->
     <div class="container products-wrapper">
         <div class="row">
             <div class="col-12">
                 <h2 class="products-title">Agregar productos</h2>
             </div>
-            <!-- Show the "ultimos" products -->
-			<form class="nuestroForm" action="" method="post">
-                <label class="form-label" for="image">
-                    Imagen
-                </label>
-                <input class="form-input" type="text" name="image" id="image" value="<%= locals.old !== undefined && locals.old.image ? locals.old.image : '' %>">
-                <% if(locals.errors && locals.errors.image) { %>
-                    <div class="error"><%= locals.errors.image.msg %></div>
-                <% } %>
 
-                <label class="form-label" for="product">
-                    Nombre del Producto
-                </label>
-                <input class="form-input" type="text" name="product" id="product" value="<%= locals.old !== undefined && locals.old.product ? locals.old.product : '' %>">
-                <% if(locals.errors && locals.errors.product) { %>
-                    <div class="error"><%= locals.errors.product.msg %></div>
+            <form class="nuestroForm" action="/patitos/add-product" method="post">
+                <label class="form-label" for="foto">Nombre del Archivo de la Foto</label>
+                <input class="form-input" type="text" name="foto" id="foto" value="nombre_imagen.jpg" required>
+                <% if(locals.errors && locals.errors.foto) { %>
+                    <div class="error"><%= locals.errors.foto.msg %></div>
                 <% } %>
-
-                <label class="form-label" for="descripcion">
-                    Descripción
-                </label>
-                <input class="form-input" type="text" name="descripcion" id="descripcion" value="<%= locals.old !== undefined && locals.old.descripcion ? locals.old.descripcion : '' %>">
+            
+                <label class="form-label" for="producto">Nombre del Producto</label>
+                <input class="form-input" type="text" name="producto" id="producto" value="Patito de Goma" required>
+                <% if(locals.errors && locals.errors.producto) { %>
+                    <div class="error"><%= locals.errors.producto.msg %></div>
+                <% } %>
+            
+                <label class="form-label" for="descripcion">Descripción</label>
+                <input class="form-input" type="text" name="descripcion" id="descripcion" value="Patito amarillo de goma, ideal para baños relajantes." required>
                 <% if(locals.errors && locals.errors.descripcion) { %>
                     <div class="error"><%= locals.errors.descripcion.msg %></div>
                 <% } %>
-
+            
                 <button class="buy-now-button buttonRegister" type="submit">Agregar Producto</button>
-
             </form>
+            
         </div>
     </div>
 
-    <!-- footer -->
     <%- include('./partials/footer') %>
-    <!-- /footer -->
 
 </body>
 
