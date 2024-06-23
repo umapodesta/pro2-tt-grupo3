@@ -6,9 +6,11 @@
 
 <body>
 	<!-- Header -->
-	<%- include("./partials/header") %>
-	<!-- /Header -->
-
+	<% if (locals.usuario) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/header') %>
+    <% } %>
 	<!-- Novedades -->
 	<div class="container products-wrapper">
 		<div class="row">

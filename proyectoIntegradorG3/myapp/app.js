@@ -23,15 +23,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Configura la sesión
 app.use(session({
   secret: 'Nuestro mensaje secreto',
   resave: false,
   saveUninitialized: true,
- // cookie: { secure: true } // Asegúrate de ajustar esto según tus necesidades
+  // cookie: { secure: true } // Asegúrate de ajustar esto según tus necesidades
 }));
 
+// Middleware para cargar usuario desde la sesión o la cookie
 app.use(function(req, res, next) {
   if (req.session.usuario) {
     res.locals.usuario = req.session.usuario;
@@ -54,17 +54,33 @@ app.use(function(req, res, next) {
   }
 });
 
-
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', usersRouter); // Ruta para manejar usuarios
 app.use('/patitos', patitosRouter);
 
-// catch 404 and forward to error handler
+// Ruta para registrar un nuevo usuario
+app.post('/users/register', async (req, res, next) => {
+  try {
+    // Aquí deberías insertar el nuevo usuario en la base de datos
+    // Luego de registrar con éxito
+    alert('¡Registro exitoso! Por favor, inicia sesión para continuar.');
+
+    // Redirigir al usuario a la página de inicio de sesión después de 3 segundos
+    setTimeout(function() {
+      res.redirect('/users/login'); // Reemplaza '/users/login' con la ruta correcta a tu página de inicio de sesión
+    }, 3000); // 3000 milisegundos (3 segundos) antes de redirigir
+  } catch (error) {
+    console.error('Error al registrar usuario:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
+// Captura de errores 404 y manejo de errores
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// Manejador de errores
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;

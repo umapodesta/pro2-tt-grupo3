@@ -56,31 +56,34 @@ const usersControllers = {
     },
 
     registerPost: function (req, res) {
-        let form = req.body;
-        let errors = validationResult(req);
-        if (errors.isEmpty()) {
+      let form = req.body;
+      let errors = validationResult(req);
+      if (errors.isEmpty()) {
           const hashedPassword = bcrypt.hashSync(form.contrasenia, 10);
           const newUser = {
-            mail: form.mail,
-            usuario: form.usuario,
-            contrasenia: hashedPassword,
-            fechaNacimiento: form.fechaNacimiento,
-            numeroDocumento: form.numeroDocumento,
-            foto: form.foto,
-          }
+              nombre: form.nombre,
+              apellido: form.apellido,
+              mail: form.mail,
+              usuario: form.usuario,
+              contrasenia: hashedPassword,
+              fechaNacimiento: form.fechaNacimiento,
+              numeroDocumento: form.numeroDocumento,
+              foto: form.foto,
+          };
+  
           db.Usuario.create(newUser)
-          .then((form) => {
-            //req.session.usuario = form;
-            return res.redirect("/users/login");
+          .then((user) => {
+              res.render("register", { title: "register", successMessage: "¡Registro exitoso! Por favor, inicia sesión para continuar." });
           })
           .catch((err) => {
-            return console.log(err);
+              console.log(err);
+              res.render("register", { title: "register", errorMessage: "Hubo un problema durante el registro, por favor intenta nuevamente." });
           });
-        }
-        else{
-          return res.render("register", {title: "register", errors: errors.mapped(), old: req.body});
-        }
-      },
+      } else {
+          res.render("register", { title: "register", errors: errors.mapped(), old: req.body });
+      }
+  },
+  
 
 
     profile: function (req, res) {

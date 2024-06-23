@@ -21,6 +21,18 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 			<form class="formRegister" action="/users/register" method="post">
+				<label class="form-label">Nombre</label>
+				<input class="form-input" type="text" name="nombre" id="nombre" required>
+				<% if (locals.errors && errors.nombre) { %>
+					<div class="error"><%= errors.nombre.msg %></div>
+				<% } %>
+			
+				<label class="form-label">Apellido</label>
+				<input class="form-input" type="text" name="apellido" id="apellido" required>
+				<% if (locals.errors && errors.apellido) { %>
+					<div class="error"><%= errors.apellido.msg %></div>
+				<% } %>
+
 				<label class="form-label">
 					Email
 				</label>
@@ -73,7 +85,11 @@
 				<button class="buy-now-button buttonRegister" type="submit">Registrarse</button>
 			</form>
 
-
+			<% if (locals.successMessage) { %>
+				<script>
+					alert("<%= locals.successMessage %>");
+				</script>
+			<% } %>
 	<!-- footer -->
 	<%- include('./partials/footer') %>
 	<!-- /footer -->

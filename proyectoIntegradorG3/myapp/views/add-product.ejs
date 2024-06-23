@@ -5,42 +5,56 @@
 <%- include('./partials/head') %>
 
 <body>
-	<!-- Header -->
-	<%- include('./partials/headerLogueado') %>
-	<!-- /Header -->
+    <!-- Header -->
+    <% if (locals.usuario) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/header') %>
+    <% } %>
+    <!-- /Header -->
 
-	<!-- Novedades -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Agregar productos</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<form class = "nuestroForm" action = "/patitos" method="get"> 
+    <!-- Novedades -->
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Agregar productos</h2>
+            </div>
+            <!-- Show the "ultimos" products -->
+			<form class="nuestroForm" action="" method="post">
+                <label class="form-label" for="image">
+                    Imagen
+                </label>
+                <input class="form-input" type="text" name="image" id="image" value="<%= locals.old !== undefined && locals.old.image ? locals.old.image : '' %>">
+                <% if(locals.errors && locals.errors.image) { %>
+                    <div class="error"><%= locals.errors.image.msg %></div>
+                <% } %>
 
-				<label class="form-label">
-					Imagen
-				</label>
-				<input class="form-input" type="image" name="image" id="image" required>
+                <label class="form-label" for="product">
+                    Nombre del Producto
+                </label>
+                <input class="form-input" type="text" name="product" id="product" value="<%= locals.old !== undefined && locals.old.product ? locals.old.product : '' %>">
+                <% if(locals.errors && locals.errors.product) { %>
+                    <div class="error"><%= locals.errors.product.msg %></div>
+                <% } %>
 
-				<label class="form-label">
-					Nombre del Producto
-				</label>
-				<input class="form-input" type="text" name="product" id="product" required>
+                <label class="form-label" for="descripcion">
+                    Descripción
+                </label>
+                <input class="form-input" type="text" name="descripcion" id="descripcion" value="<%= locals.old !== undefined && locals.old.descripcion ? locals.old.descripcion : '' %>">
+                <% if(locals.errors && locals.errors.descripcion) { %>
+                    <div class="error"><%= locals.errors.descripcion.msg %></div>
+                <% } %>
 
-				<label class="form-label">
-					Descripcion
-				</label>
-				<input class="form-input" type="text" name="Descripción" id="Descripción" required>
+                <button class="buy-now-button buttonRegister" type="submit">Agregar Producto</button>
 
-				<button class="buy-now-button buttonRegister" type="submit">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
 
-			</form>
+    <!-- footer -->
+    <%- include('./partials/footer') %>
+    <!-- /footer -->
 
-
-	<!-- footer -->
-	<%- include('./partials/footer') %>
-	<!-- /footer -->
 </body>
 
 </html>
