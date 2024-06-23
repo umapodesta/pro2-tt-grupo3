@@ -61,6 +61,13 @@ let validationsRegister = [
     body('contrasenia').notEmpty().withMessage('Debes completar la contraseña.')
         .isLength({ min: 4 }).withMessage('La contraseña debe tener más de 4 caracteres')
 ];
+let validationsEdit = [
+    body('email').notEmpty().withMessage('El email es obligatorio.').bail().isEmail().withMessage('Debe ser un email válido'),
+    body('username').notEmpty().withMessage('El nombre de usuario es obligatorio.'),
+    body('password').optional({ checkFalsy: true }).isLength({ min: 4 }).withMessage('La contraseña debe tener al menos 4 caracteres'),
+    body('fechaNacimiento').notEmpty().withMessage('La fecha de nacimiento es obligatoria.'),
+    body('dni').notEmpty().withMessage('El número de documento es obligatorio.')
+];
 
 
 /* GET INFO */
@@ -71,6 +78,7 @@ router.get("/register", usersControllers.register);
 router.post("/register", validationsRegister, usersControllers.registerPost);
 router.get("/profile", usersControllers.profile);
 router.get("/usersEdit", usersControllers.usersEdit);
+router.post('/usersEdit', validationsEdit, usersControllers.usersEditPost); // Procesar edición de usuario
 router.post('/logout', usersControllers.logout);
 
 module.exports = router;

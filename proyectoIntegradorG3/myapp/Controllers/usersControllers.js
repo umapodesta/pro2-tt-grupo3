@@ -12,38 +12,23 @@ const usersControllers = {
         
     },
     loginPost: function (req, res) {
-      let form = req.body;
+      user = db.Usuario;
       let errors = validationResult(req);
       if (errors.isEmpty()) {
-        let filtro = {
-          where: [
-            {
-              mail: form.mail,
-            },
-          ],
-        };
-        db.Usuario.findOne(filtro)
-        .then(function (result) {
-          let usuario = result;
-          if (
-            usuario &&
-            bcrypt.compareSync(form.contrasenia, usuario.contrasenia)
-          ) {
-            req.session.usuario = usuario;
-            if (form.recordar != undefined) { //en el lugar de form antes habia un req.body
-              res.cookie("userId", usuario.id, { maxAge: 1000 * 60 * 60 * 24 });
-            }
-            return res.redirect("/");
-          } else {
-            return res.redirect("/");
+        user.findOne({
+          where:{email: req.body.mail}
+        }).then(function(userFound){
+          req.session.usuario = userFound
+          if(req.body.recordarme != undefined){
+            res.cookie("recordarme", userFound.email, {maxAge:24*60*60*1000})
           }
+          return res.redirect("/");
+        }).catch(function (errors) {
+                console.log(errors);
         })
-        .catch((err) => console.log(err));
+      }else{
+        return res.render("login", {errors: errors.mapped()})
       }
-      else {
-        //Si hay errores, volvemos al formulario con los mensajes
-        res.render("login", {errors: errors.mapped(), old: req.body});
-      }      
     },
 
     register: function(req, res) {
@@ -56,34 +41,26 @@ const usersControllers = {
     },
 
     registerPost: function (req, res) {
+      user = db.Usuario;
       let form = req.body;
       let errors = validationResult(req);
       if (errors.isEmpty()) {
           const hashedPassword = bcrypt.hashSync(form.contrasenia, 10);
-          const newUser = {
-              nombre: form.nombre,
-              apellido: form.apellido,
-              mail: form.mail,
-              usuario: form.usuario,
-              contrasenia: hashedPassword,
-              fechaNacimiento: form.fechaNacimiento,
-              numeroDocumento: form.numeroDocumento,
-              foto: form.foto,
-          };
-  
-          db.Usuario.create(newUser)
-          .then((user) => {
-              res.render("register", { title: "register", successMessage: "¡Registro exitoso! Por favor, inicia sesión para continuar." });
+          user.create({
+            nombre: form.nombre,
+            apellido: form.apellido,
+            mail: form.mail,
+            usuario: form.usuario,
+            contrasenia: hashedPassword,
+            fechaNacimiento: form.fechaNacimiento,
+            numeroDocumento: form.numeroDocumento,
+            foto: form.foto
           })
-          .catch((err) => {
-              console.log(err);
-              res.render("register", { title: "register", errorMessage: "Hubo un problema durante el registro, por favor intenta nuevamente." });
-          });
+          return res.redirect("/")
       } else {
           res.render("register", { title: "register", errors: errors.mapped(), old: req.body });
       }
   },
-  
 
 
     profile: function (req, res) {
@@ -113,18 +90,65 @@ const usersControllers = {
             }); 
     },
 
-    usersEdit: function (req, res) {
-        db.Usuario.findOne()
-        .then(function(results){
-            return res.render('usersEdit', {
-                title: 'Profile Edit', 
-                usuario: results
-            });
-        })
-        .catch(function(respuestaNegativa){
-            console.log(respuestaNegativa);
-        }); 
-    },
+    usersEdit: function (req, res, next) {
+      if (req.session.usuario) {
+          let id = req.session.usuario.id;
+
+          db.Usuario.findByPk(id)
+              .then(function(result){
+                  return res.render('editUsuario', {
+                      title: 'Editar Perfil',
+                      usuario: result
+                  });
+              })
+              .catch(function(error){
+                  console.log(error);
+                  res.send('Error interno del servidor');
+              });    
+      } else {
+          return res.redirect("/users/login");
+      }
+  },
+
+  // Procesar la edición de usuario
+  usersEditPost: async function (req, res) {
+      const { email, username, password, fechaNacimiento, dni } = req.body;
+      const userId = req.session.usuario.id;
+
+      try {
+          let usuario = await db.Usuario.findByPk(userId);
+
+          if (!usuario) {
+              return res.send("Usuario no encontrado");
+          }
+
+          // Actualizar los datos del usuario
+          usuario.mail = email;
+          usuario.usuario = username;
+          usuario.fechaNacimiento = fechaNacimiento;
+          usuario.numeroDocumento = dni;
+
+          // Si se proporcionó una nueva contraseña, actualizarla
+          if (password) {
+              const hashedPassword = bcrypt.hashSync(password, 10);
+              usuario.contrasenia = hashedPassword;
+          }
+
+          // Si se subió una nueva foto de perfil, actualizarla
+          if (req.file) {
+              usuario.foto = req.file.filename; // Ajustar según cómo se guarda el nombre en la base de datos
+          }
+
+          // Guardar los cambios en la base de datos
+          await usuario.save();
+
+          res.redirect('/'); // Redirigir a la página principal u otra página de perfil
+      } catch (error) {
+          console.log(error);
+          res.send('Error interno del servidor');
+      }
+  },
+
     users: function (req,res) {
         db.Usuario.findAll()
         .then(function (result) {
