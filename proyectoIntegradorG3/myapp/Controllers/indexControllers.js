@@ -1,28 +1,19 @@
 const db = require ("../database/models");
 
 const indexControllers = {
-    index : function (req, res) {
-        
-        /*let id = req.params.id; */
-
+    index : function(req, res) {
         db.Patito.findAll({
-            include: [{association: "usuario"}, 
-            {association: "comentario"}
-        ]
-           })
-        .then(function(result){
-            return res.render("index", {productos: result})
-            return res.send(result)
+            include: [{ association: 'usuario' }],
+            order: [['createdAt', 'DESC']],
+            limit: 10 // Define la cantidad de productos a mostrar según lo que el equipo decida
         })
-        .then(function(results){
-            
-            //return res.render('product', {title:"Product Detail", productos: productos, comentarios: comentarios});
+        .then(function(result) {
+            return res.render('index', { productos: result });
         })
-        .catch(function(respuestaNegativa){
-           return console.log(respuestaNegativa);
+        .catch(function(err) {
+            console.log(err);
+            return res.status(500).send('Error interno del servidor');
         });
-
-       /* return res.render ('index', {title: "Index", productos: db.productos}); */
     },
 
     results : function (req, res) {

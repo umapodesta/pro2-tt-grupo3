@@ -1,85 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
 
+<!-- Include Head -->
 <%- include('./partials/head') %>
 
 <body>
-	<!-- Header -->
-	<% if (locals.usuario) { %>
-        <%- include('./partials/headerLogueado') %>
+    <!-- Header -->
+    <% if (locals.usuario) { %>
+    <%- include('./partials/headerLogueado') %>
     <% } else { %>
-        <%- include('./partials/header') %>
+    <%- include('./partials/header') %>
     <% } %>
-	<!-- /Header -->
-	
-	<!-- Banner -->
-	<div class="banner">
-		<img class="foto-perfil" src="images/img-home-banner.jpg" alt="Banner de ofertas">
-	</div>
-	<!-- /Banner -->
+    <!-- /Header -->
 
-	<!-- Novedades -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Novedades</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<% for( let index = 0; index < 4; index++ ) { %>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/patitos/id/<%= productos[index].id %>">
-							<figure class="product-box_image">
-								<img class="fotosPatitos" src="/images/products/<%= productos[index].foto %>" alt="<%= productos[index].producto %>">
-							</figure>
-							<article class="product-box_data">
-								<h2><%= productos[index].producto %></h2>
-								<p><%= productos[index].descripcion %></p>
-								<p><%= productos[index].id %></p>
-							</article>
-						</a>
-					</section>
-				</div>
-			<% } %>
-			
-		</div>
-	</div>
-	<!-- /Novedades -->
-	
-	<!-- Más comentados -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Más comentados</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<% for( let index = 0; index < 4; index++ ) { %>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/patitos/id/<%= productos[index].id %>">
-							<figure class="product-box_image">
-								<img class="fotosPatitos" src="/images/products/<%= productos[index].foto %>" alt="<%= productos[index].producto %>">
-							</figure>
-							<article class="product-box_data">
-								<h2><%= productos[index].producto %></h2>
-								<p><%= productos[index].producto %></p>
-								<p><%= productos[index].id %></p>
-							</article>
-						</a>
-					</section>
-				</div>
-			<% } %>
-		
-		</div>
-	</div>
-	<!-- /Más comentados -->
+    <!-- Banner -->
+    <div class="banner">
+        <img class="foto-perfil" src="images/img-home-banner.jpg" alt="Banner de ofertas">
+    </div>
+    <!-- /Banner -->
 
+    <!-- Novedades -->
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Novedades</h2>
+            </div>
+            <!-- Mostrar los últimos productos -->
+            <% for(let index = 0; index < productos.length && index < 4; index++) { %>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <section class="product-box">
+                    <a href="/patitos/id/<%= productos[index].id %>">
+                        <figure class="product-box_image">
+                            <img class="fotosPatitos" src="/images/products/<%= productos[index].foto %>"
+                                alt="<%= productos[index].producto %>">
+                        </figure>
+                        <article class="product-box_data">
+                            <h2><%= productos[index].producto %></h2>
+                            <p><%= productos[index].descripcion %></p>
+                            <% if (productos[index].usuario) { %>
+                            <p><%= productos[index].usuario.usuario %></p>
+                            <% } else { %>
+                            <p>Usuario no disponible</p>
+                            <% } %>
+                        </article>
+                    </a>
+                </section>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <!-- /Novedades -->
 
-	<!-- footer -->
-	<%- include('./partials/footer') %>
-	<!-- /footer -->
-	
+    <!-- Más comentados -->
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Más comentados</h2>
+            </div>
+            <!-- Mostrar los productos más comentados -->
+            <% for(let index = 0; index < productos.length && index < 4; index++) { %>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <section class="product-box">
+                    <a href="/patitos/id/<%= productos[index].id %>">
+                        <figure class="product-box_image">
+                            <img class="fotosPatitos" src="/images/products/<%= productos[index].foto %>"
+                                alt="<%= productos[index].producto %>">
+                        </figure>
+                        <article class="product-box_data">
+                            <h2><%= productos[index].producto %></h2>
+                            <p><%= productos[index].descripcion %></p>
+                            <% if (productos[index].usuario) { %>
+                            <p><%= productos[index].usuario.usuario %></p>
+                            <% } else { %>
+                            <p>Usuario no disponible</p>
+                            <% } %>
+                        </article>
+                    </a>
+                </section>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <!-- /Más comentados -->
 
-</body>	
+    <!-- footer -->
+    <%- include('./partials/footer') %>
+    <!-- /footer -->
+
+</body>
+
 </html>
