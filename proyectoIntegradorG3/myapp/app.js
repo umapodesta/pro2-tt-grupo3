@@ -32,33 +32,28 @@ app.use(session({
  // cookie: { secure: true } // Asegúrate de ajustar esto según tus necesidades
 }));
 
-app.use(function (req, res, next) {
-  if (req.session.usuario != undefined){
-    res.locals.usuario = req.session.usuario
-  }   
-  return next()
-})
-
-app.use(function(req, res, next){
-  if (req.cookies.userId != undefined && req.session.usuario == undefined) {
+app.use(function(req, res, next) {
+  if (req.session.usuario) {
+    res.locals.usuario = req.session.usuario;
+  } else if (req.cookies.userId && !req.session.usuario) {
     let id = req.cookies.userId;
-
     db.Usuario.findByPk(id)
-    .then(function(usuario){
-
-      req.session.usuario = usuario;
-      res.locals.usuario = usuario;
-
-      return next();
-    })
-    .catch(function (error) {
-      return console.log(error)
-    });
+      .then(function(usuario) {
+        if (usuario) {
+          req.session.usuario = usuario;
+          res.locals.usuario = usuario;
+        }
+        next();
+      })
+      .catch(function(error) {
+        console.log(error);
+        next();
+      });
+  } else {
+    next();
   }
-  else {
-    return next()
-  }
-})
+});
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
