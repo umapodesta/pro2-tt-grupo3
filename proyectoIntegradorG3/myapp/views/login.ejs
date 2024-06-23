@@ -17,25 +17,25 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 			<form class = "nuestroForm" action = "/users/login" method="POST"> 
-				<label class="form-label">
+				<label class="form-label" for="email">
 					Email
 				</label>
-				<input class="form-input" type="email" name="mail" id="email" required>
+				<input class="form-input" type="email" name="mail" id="email" value="<%= locals.old !== undefined && old.mail ? old.mail : "" %>">>
 
 				<% if (locals.errors && errors.mail) { %>
                     <div class="error"><%= errors.mail.msg %></div>
                 <% } %>
 
-				<label class="form-label">
+				<label class="form-label" for="password">
 					Contraseña
 				</label>
-				<input class="form-input" type="password" name="contrasenia" id="password" minlength='4' required>
+				<input class="form-input" type="password" name="contrasenia" id="password" minlength='4' value="<%= locals.old !== undefined && old.contrasenia ? old.contrasenia : "" %>">
 				
 				<% if (locals.errors && errors.contrasenia) { %>
                     <div class="error"><%= errors.contrasenia.msg %></div>
                 <% } %>
 
-				<label class="form-label">
+				<label class="form-label" for="recordarme">
 					Recordarme
 				</label>
 				<input type="checkbox" name="recordarme" id="recordarme">
