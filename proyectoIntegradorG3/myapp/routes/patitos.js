@@ -18,7 +18,7 @@ let validationsAdd = [
 router.get('/', patitosControllers.patitos); // Ruta para mostrar todos los productos
 router.get('/add-product', patitosControllers.add); // Ruta para mostrar el formulario de agregar producto
 router.post('/add-product', validationsAdd, patitosControllers.store); // Ruta para procesar el formulario de agregar producto
-
+router.post('/product-edit/:id', validationsAdd, patitosControllers.edit)
 router.get('/id/:idPatitos', patitosControllers.detalle); // Ruta para mostrar detalles de un producto específico
-
+router.post('/product-delete/:id', patitosControllers.delete)
 module.exports = router;

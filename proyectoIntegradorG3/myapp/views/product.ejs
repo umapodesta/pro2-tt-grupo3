@@ -14,60 +14,71 @@
     <!-- /Header -->
 
     <!-- product detail -->
-    <div class="container products-wrapper">
-        <div class="d-flex align-items-center">
-            <h2 class="products-title"><%= productos.product %></h2> 
-            <% if (locals.prop) { %>
-                <p class="product-detail-description">
-                    <form action="/patitos" method="post">
-                        <input type="hidden" name="id" value="<%= productos.id %>">
-                        <button type="submit">Editar</button>
-                    </form>
-                    <form action="/patitos" method="post">
-                        <input type="hidden" name="id" value="<%= productos.id %>">
-                        <input type="hidden" name="idUsuario" value="<%= productos.usuario.id %>">
-                        <button type="submit">Eliminar</button>
-                    </form>
-                </p>
-            <% } %>
-        </div>
-
-        <% if (!locals.prop && productos.usuario) { %>
-            <p>Producto de <a href="/users/profile/id/<%= productos.usuario.usuario %>"></a></p>
-        <% } %>
-
-        <div class="product-detail">
-            <div class="row">
-                <article class="col-12 col-lg-8 product-detail-info">
-                    <img src="<%= productos.producto %>" alt="" class="product-detail-img">
-                    <p class="product-detail-description"><%= productos.descripcion %></p>
-                </article>
-
-                <div class="col-12 col-lg-4">
-                    <section class="comments">
-                        <!-- Código de comentarios -->
-                    </section>
-
-                    <% if (locals.usuario) { %>
-                        <form class="form" action="/patitos/id/<%= productos.id %>" method="post">
-                            <input name="comentario" type="text" value="" placeholder="Agregue su comentario">
-                            <button type="submit">Agregar comentario</button>
-                        </form>
-                        <% if (locals.errors && locals.errors.comentario) { %>
-                            <p><%= locals.errors.comentario.msg %></p>
-                        <% } %>
-                    <% } else { %>
-                        <div class="comentarioDeslogueado">
-                            <a href="/users/login">Debes iniciar sesión para agregar un comentario.</a>
-                        </div>
-                    <% } %>
-
-                    <hr>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<article class="mb-4">
+					<div class="d-flex align-items-center">
+						<h2 class="products-title"><%= producto.producto %></h2>
+					</div>
+	
+					<div class="mt-4">
+						<% if (locals.prop) { %>
+							<div class="d-flex justify-content-between align-items-center mb-3">
+								<form action="/patitos/product-edit/<%= producto.id %>" method="get">
+									<button type="submit" class="btn btn-primary">Editar</button>
+								</form>
+								<form action="/patitos/product-delete/<%= producto.id %>" method="post">
+									<button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?')">Eliminar</button>
+								</form>
+							</div>
+						<% } else { %>
+							<div class="error-message mt-3">
+								<p class="mb-2 text-danger" style="font-size: 1.2rem;"><strong>No puedes editar o eliminar este producto si no estás registrado.</strong></p>
+								<a href="/users/login" class="btn btn-primary">Iniciar sesión</a>
+							</div>
+						<% } %>
+					</div>
+	
+					<% if (!locals.prop && producto.usuario) { %>
+						<div class="mt-3">
+							<p>Producto de <a href="/users/profile/id/<%= producto.usuario.usuario %>"><%= producto.usuario.usuario %></a></p>
+						</div>
+					<% } %>
+	
+					<div class="product-detail mt-4">
+						<div class="row">
+							<div class="col-12 col-lg-8">
+								<img src="<%= producto.foto %>" alt="" class="product-detail-img">
+								<p class="product-detail-description"><%= producto.descripcion %></p>
+							</div>
+	
+							<div class="col-12 col-lg-4 mt-4 mt-lg-0">
+								<section class="comments">
+									<!-- Código de comentarios -->
+								</section>
+	
+								<% if (locals.usuario) { %>
+									<form class="form mt-4" action="/patitos/id/<%= producto.id %>" method="post">
+										<input name="comentario" type="text" value="" placeholder="Agregue su comentario" class="form-control mb-2">
+										<button type="submit" class="btn btn-primary">Agregar comentario</button>
+									</form>
+									<% if (locals.errors && locals.errors.comentario) { %>
+										<p class="text-danger mt-2"><%= locals.errors.comentario.msg %></p>
+									<% } %>
+								<% } else { %>
+									<div class="comentarioDeslogueado mt-4">
+										<a href="/users/login">Debes iniciar sesión para agregar un comentario.</a>
+									</div>
+								<% } %>
+							</div>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+	
     <!-- /product detail -->
 
     <!-- footer -->

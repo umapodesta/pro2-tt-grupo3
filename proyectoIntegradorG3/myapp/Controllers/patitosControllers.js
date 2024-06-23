@@ -53,21 +53,72 @@ const patitosControllers = {
         });
     },
 
-    detalle: function(req, res) {
-        let idPatitos = req.params.idPatitos;
+  detalle: function(req, res) {
+    let idPatitos = req.params.idPatitos;
   
-        db.Patito.findByPk(idPatitos)
-        .then((result) => {
-            if (!result) {
-                return res.status(404).send("Producto no encontrado");
-            }
-            return res.render("product", {productos: result});
-        })
-        .catch((err) => {
-            console.log(err);
-            return res.status(500).send("Error interno del servidor");
+    db.Patito.findByPk(idPatitos, {
+        include: [{ association: "usuario" }, { association: "comentario" }]
+    })
+    .then((result) => {
+        if (!result) {
+            return res.send("Producto no encontrado");
+        }
+        return res.render("product", { producto: result });
+    })
+    .catch((err) => {
+        console.log(err);
+        return res.send("Error interno del servidor");
+    });
+  },
+
+  edit: function(req, res) {
+    let id = req.params.id;
+
+    if (!req.session.usuario) {
+        return res.render("product", {
+            error: "No puedes editar este producto si no estás registrado.",
+            loginLink: "/users/login"
         });
-    },
+    }
+
+    db.Patito.findByPk(id)
+    .then((producto) => {
+        if (!producto) {
+            return res.send("Producto no encontrado");
+        }
+        return res.render("edit-product", { producto });
+    })
+    .catch((err) => {
+        console.log(err);
+        return res.send("Error interno del servidor");
+    });
+},
+
+delete: function(req, res) {
+    let id = req.params.id;
+
+    if (!req.session.usuario) {
+        return res.render("product", {
+            error: "No puedes eliminar este producto si no estás registrado.",
+            loginLink: "/users/login"
+        });
+    }
+
+    db.Patito.findByPk(id)
+    .then((producto) => {
+        if (!producto) {
+            return res.send("Producto no encontrado");
+        }
+        return producto.destroy();
+    })
+    .then(() => {
+        return res.redirect("/"); // Redirige a la página principal o a donde prefieras
+    })
+    .catch((err) => {
+        console.log(err);
+        return res.send("Error interno del servidor");
+    });
+},
 
     store: function(req, res){
       let idUsuario = null; // Por defecto, idUsuario es null
