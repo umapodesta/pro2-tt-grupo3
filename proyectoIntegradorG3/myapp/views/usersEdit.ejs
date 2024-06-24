@@ -19,15 +19,15 @@
                 <form class="formPropio formRegister" action="/usuarios/usersEdit" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input class="form-control" type="email" id="email" name="email" value="<%= usuario.mail %>" required>
+                        <input class="form-control" type="email" id="email" name="mail" value="<%= usuario.mail %>" required>
                     </div>
                     <div class="form-group">
                         <label for="username">Usuario</label>
-                        <input class="form-control" type="text" id="username" name="username" value="<%= usuario.usuario %>" required>
+                        <input class="form-control" type="text" id="username" name="usuario" value="<%= usuario.usuario %>" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña</label>
-                        <input class="form-control" type="password" id="password" name="password" placeholder="Dejar en blanco si no desea cambiar">
+                        <input class="form-control" type="password" id="password" name="contrasenia" placeholder="Dejar en blanco si no desea cambiar">
                     </div>
                     <div class="form-group">
                         <label for="fechaNacimiento">Fecha de nacimiento</label>

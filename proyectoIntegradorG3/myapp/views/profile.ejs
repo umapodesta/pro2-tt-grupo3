@@ -1,85 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-
 <%- include('./partials/head') %>
 
 <body>
-	<!-- Header -->
-	<% if (locals.usuario) { %>
+    <!-- Header -->
+    <% if (usuario) { %>
         <%- include('./partials/headerLogueado') %>
     <% } else { %>
         <%- include('./partials/header') %>
     <% } %>
-	<!-- /Header -->
+    <!-- /Header -->
 
-	<!-- Datos del usuario -->
-	<section class="info-usuario container products-wrapper">
-		<div class="row">
-			<div class="img-container offset-3 col-2">
-				<img src= <%= usuario.foto %> alt= "foto de perfil" class="foto-perfil">
-			</div>
-			<div class="data-container col-6">
-				<div class="d-flex align-items-center ">
-					<h1 class="main-title"> <%= usuario.usuario %>
-
-						<% if (prop) { %>
+    <!-- Datos del usuario -->
+    <section class="info-usuario container products-wrapper">
+        <div class="row">
+            <div class="img-container offset-3 col-2">
+                <img src="/users/<%= usuario.foto %>" alt="foto de perfil" class="foto-perfil">
+            </div>
+            <div class="data-container col-6">
+                <div class="d-flex align-items-center">
+                    <h1 class="main-title"> <%= usuario.usuario %>
+                        <% if (prop) { %>
                             <a href="/users/userEdit">
-                            <i class="fas fa-cog"></i>
+                                <i class="fas fa-cog"></i>
                             </a>
                         <% } %>
+                    </h1>
+                    <a class="btn mt-3 ml-4" href="">SEGUIR</a>
+                </div>
+                <div>
+                    <p><%= usuario.mail %></p>
+                    <ul class="">
+                        <li><%= productos.length %> productos</li>
+                        <!-- Puedes agregar lógica para calcular los seguidores y comentarios dinámicamente -->
+                        <li>1400 seguidores</li>
+                        <li>30 comentarios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Datos del usuario -->
 
-						
-					</h1>
-					<a class="btn mt-3 ml-4" href="">SEGUIR</a>
-				</div>
-				<div>
-					<p><%= usuario.mail %></p>
-					<ul class="">
-						<li>4 productos</li>
-						<li>1400 seguidores</li>
-						<li>30 comentarios</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- /Datos del usuario -->
+    <!-- Mis productos -->
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Mis productos</h2>
+            </div>
+            <!-- Mostrar los productos del usuario -->
+            <% productos.forEach(producto => { %>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <section class="product-box">
+                        <a href="/productos/<%= producto.id %>">
+                            <figure class="product-box_image">
+                                <img src="/productos/<%= producto.imagenProducto %>" alt="<%= producto.nombre %>">
+                            </figure>
+                            <article class="product-box_data">
+                                <h2><%= producto.nombre %></h2>
+                                <p><%= producto.descripcion %></p>
+                                <!-- Si deseas mostrar comentarios, asegúrate de que producto.comentarios esté definido -->
+                                <!-- <p><%= producto.comentarios[0].descripcion %></p> -->
+                            </article>
+                        </a>
+                    </section>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <!-- /Mis productos -->
 
-	<!-- Mis productos -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Mis productos</h2>
-			</div>
-			<!-- Show mis productos -->
-			<% for(let index = 0; index < 4; index++) { %>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/patitos">
-							<figure class="product-box_image">
-								<img src="<%= productos[index].imagenProducto %>" alt="<%= productos[index].nombre %>">
-							</figure>
-							<article class="product-box_data">
-								<h2><%= productos[index].nombre %></h2>
-								<p><%= productos[index].descripcion %></p>
-								<p><%= productos[index].comentarios[0].descripcion %></p>
-							</article>
-						</a>
-					</section>
-				</div>
-			<% } %>
-		</div>
-	</div>
-	
-	<!-- /Mis productos -->
-	<div class="container products-wrapper">
-		<div class="row">
-			
-			<!-- Mostrar mis productos -->
-
-	<!-- footer -->
-	<%- include('./partials/footer') %>
-	<!-- /footer -->
-</body>	
+    <!-- footer -->
+    <%- include('./partials/footer') %>
+    <!-- /footer -->
+</body>
 </html>

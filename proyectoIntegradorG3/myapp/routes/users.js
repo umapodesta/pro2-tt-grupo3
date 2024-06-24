@@ -62,9 +62,9 @@ let validationsRegister = [
         .isLength({ min: 4 }).withMessage('La contraseña debe tener más de 4 caracteres')
 ];
 let validationsEdit = [
-    body('email').notEmpty().withMessage('El email es obligatorio.').bail().isEmail().withMessage('Debe ser un email válido'),
-    body('username').notEmpty().withMessage('El nombre de usuario es obligatorio.'),
-    body('password').optional({ checkFalsy: true }).isLength({ min: 4 }).withMessage('La contraseña debe tener al menos 4 caracteres'),
+    body('mail').notEmpty().withMessage('El email es obligatorio.').bail().isEmail().withMessage('Debe ser un email válido'),
+    body('usuario').notEmpty().withMessage('El nombre de usuario es obligatorio.'),
+    body('contrasenia').optional({ checkFalsy: true }).isLength({ min: 4 }).withMessage('La contraseña debe tener al menos 4 caracteres'),
     body('fechaNacimiento').notEmpty().withMessage('La fecha de nacimiento es obligatoria.'),
     body('dni').notEmpty().withMessage('El número de documento es obligatorio.')
 ];

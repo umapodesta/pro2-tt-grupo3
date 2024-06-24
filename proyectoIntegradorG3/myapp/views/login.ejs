@@ -1,58 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-
 <%- include('./partials/head') %>
 
 <body>
-	<!-- Header -->
-	<% if (locals.usuario) { %>
+    <!-- Header -->
+    <% if (locals.usuario) { %>
         <%- include('./partials/headerLogueado') %>
     <% } else { %>
         <%- include('./partials/header') %>
     <% } %>
-	<!-- /Header -->
+    <!-- /Header -->
 
-	<!-- Novedades -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Ingresar</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<form class = "nuestroForm" action = "/users/login" method="POST"> 
-				<label class="form-label" for="email">
-					Email
-				</label>
-				<input class="form-input" type="email" name="mail" id="email" value="<%= locals.old !== undefined && old.mail ? old.mail : "" %>">>
-
-				<% if (locals.errors && errors.mail) { %>
-                    <div class="error"><%= errors.mail.msg %></div>
+    <!-- Formulario de Login -->
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Ingresar</h2>
+            </div>
+            <form class="nuestroForm" action="/users/login" method="POST">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" type="email" name="mail" id="email" value="<%= locals.old && locals.old.mail ? locals.old.mail : '' %>" required>
+                <% if (locals.errors && locals.errors.mail) { %>
+                    <div class="error"><%= locals.errors.mail.msg %></div>
                 <% } %>
 
-				<label class="form-label" for="password">
-					Contraseña
-				</label>
-				<input class="form-input" type="password" name="contrasenia" id="password" minlength='4' value="<%= locals.old !== undefined && old.contrasenia ? old.contrasenia : "" %>">
-				
-				<% if (locals.errors && errors.contrasenia) { %>
-                    <div class="error"><%= errors.contrasenia.msg %></div>
+                <label class="form-label" for="password">Contraseña</label>
+                <input class="form-input" type="password" name="contrasenia" id="password" minlength="4" required>
+                <% if (locals.errors && locals.errors.contrasenia) { %>
+                    <div class="error"><%= locals.errors.contrasenia.msg %></div>
                 <% } %>
 
-				<label class="form-label" for="recordarme">
-					Recordarme
-				</label>
-				<input type="checkbox" name="recordarme" id="recordarme">
-				
-				<button class="buy-now-button buttonRegister" type="submit">Login</button>
+                <label class="form-label" for="recordarme">Recordarme</label>
+                <input type="checkbox" name="recordarme" id="recordarme">
 
-			</form>
+                <button class="buy-now-button buttonRegister" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 
-			
-
-	<!-- footer -->
-	<%- include('./partials/footer') %>
-	<!-- /footer -->
+    <!-- Footer -->
+    <%- include('./partials/footer') %>
+    <!-- /Footer -->
 </body>
 
 </html>
