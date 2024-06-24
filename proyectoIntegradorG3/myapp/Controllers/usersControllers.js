@@ -4,55 +4,53 @@ const { validationResult } = require('express-validator');
 
 const usersControllers = {
   login: function(req, res) {
-    if (req.session.usuario != undefined) {
+    if (req.session.usuario) {
       return res.redirect("/users/profile"); // Redirige al perfil del usuario si ya está logueado
     }
     return res.render("login", { title: "Login" });
   },
 
-    loginPost: function(req, res) {
-      console.log("Iniciando proceso de login");
-      const errors = validationResult(req);
-    
-      if (!errors.isEmpty()) {
-        console.log("Errores de validación:", errors.mapped());
-        return res.render("login", { errors: errors.mapped() });
-      }
-    
-      console.log("No hay errores de validación");
-    
-      // Buscar usuario por correo electrónico
-      db.Usuario.findOne({ where: { mail: req.body.mail } })
-        .then(userFound => {
-          if (!userFound) {
-            console.log("Usuario no encontrado");
-            return res.render("login", { errors: { general: { msg: 'Usuario no encontrado' } } });
-          }
-    
-          // Comparar la contraseña ingresada con la contraseña almacenada
-          const passwordMatch = bcrypt.compareSync(req.body.contrasenia, userFound.contrasenia);
-          if (!passwordMatch) {
-            console.log("Contraseña incorrecta");
-            return res.render("login", { errors: { general: { msg: 'Contraseña incorrecta' } } });
-          }
-    
-          console.log("Usuario encontrado:", userFound);
-          req.session.usuario = userFound; // Almacena el usuario en la sesión
-    
-          if (req.body.recordarme) {
-            res.cookie("recordarme", userFound.mail, { maxAge: 24 * 60 * 60 * 1000 });
-          }
-    
-          return res.redirect('/users/profile'); // Redirige al perfil del usuario
-        })
-        .catch(error => {
-          console.log("Error al encontrar usuario:", error);
-          return res.render("login", { errors: { general: { msg: 'Error interno del servidor' } } });
-        });
-    },
+  loginPost: function(req, res) {
+    console.log("Iniciando proceso de login");
+    const errors = validationResult(req);
+  
+    if (!errors.isEmpty()) {
+      console.log("Errores de validación:", errors.mapped());
+      return res.render("login", { errors: errors.mapped() });
+    }
+  
+    console.log("No hay errores de validación");
+  
+    db.Usuario.findOne({ where: { mail: req.body.mail } })
+      .then(userFound => {
+        if (!userFound) {
+          console.log("Usuario no encontrado");
+          return res.render("login", { errors: { general: { msg: 'Usuario no encontrado' } } });
+        }
+  
+        const passwordMatch = bcrypt.compareSync(req.body.contrasenia, userFound.contrasenia);
+        if (!passwordMatch) {
+          console.log("Contraseña incorrecta");
+          return res.render("login", { errors: { general: { msg: 'Contraseña incorrecta' } } });
+        }
+  
+        console.log("Usuario encontrado:", userFound);
+        req.session.usuario = userFound; // Almacena el usuario en la sesión
+  
+        if (req.body.recordarme) {
+          res.cookie("recordarme", userFound.mail, { maxAge: 24 * 60 * 60 * 1000 });
+        }
+  
+        return res.redirect('/users/profile'); // Redirige al perfil del usuario
+      })
+      .catch(error => {
+        console.log("Error al encontrar usuario:", error);
+        return res.render("login", { errors: { general: { msg: 'Error interno del servidor' } } });
+      });
+  },
     
   register: function(req, res) {
-    if (req.session.usuario != undefined) {
+    if (req.session.usuario) {
       return res.redirect("/users/profile" + req.session.usuario.id);
     } else {
       return res.render("register", { title: "register" });
@@ -81,7 +79,8 @@ const usersControllers = {
       contrasenia: hashedPassword,
       fechaNacimiento: req.body.fechaNacimiento,
       numeroDocumento: req.body.numeroDocumento,
-      foto: req.body.foto
+      foto: req.body.foto,
+      createdAt: new Date() // Establece la fecha de creación
     })
     .then(() => {
       return res.redirect("/users/login"); // Redirige al login después de registrar correctamente
@@ -105,7 +104,7 @@ const usersControllers = {
     db.Usuario.findByPk(req.session.usuario.id)
       .then(function(user) {
         if (!user) {
-          return res.status(404).send("Usuario no encontrado");
+          return res.send("Usuario no encontrado");
         }
         usuario = user;
 
@@ -117,8 +116,7 @@ const usersControllers = {
       .then(function(prods) {
         productos = prods;
 
-        // Definir `prop` basado en algún criterio
-        let prop = true; // Por ejemplo, podrías verificar permisos o roles
+        let prop = true; // Para verificar permisos o roles
 
         // Renderizar la vista con los datos del usuario y sus productos
         return res.render("profile", {
@@ -130,7 +128,7 @@ const usersControllers = {
       })
       .catch(function(error) {
         console.log(error);
-        return res.status(500).send("Error interno del servidor");
+        return res.send("Error interno del servidor");
       });
   },
 
@@ -154,7 +152,7 @@ const usersControllers = {
   },
 
   usersEditPost: async function(req, res) {
-    const { mail, username, contrasenia, fechaNacimiento, dni } = req.body;
+    const { mail, usuario, contrasenia, fechaNacimiento, numeroDocumento } = req.body;
     const userId = req.session.usuario.id;
     try {
       let usuario = await db.Usuario.findByPk(userId);
@@ -162,9 +160,9 @@ const usersControllers = {
         return res.send("Usuario no encontrado");
       }
       usuario.mail = mail;
-      usuario.usuario = username;
+      usuario.usuario = usuario;
       usuario.fechaNacimiento = fechaNacimiento;
-      usuario.numeroDocumento = dni;
+      usuario.numeroDocumento = numeroDocumento;
       if (contrasenia) {
         const hashedPassword = bcrypt.hashSync(contrasenia, 10);
         usuario.contrasenia = hashedPassword;

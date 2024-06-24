@@ -28,11 +28,10 @@ app.use(session({
   secret: 'Nuestro mensaje secreto',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Asegúrate de ajustar esto según tus necesidades
 }));
 
 // Middleware para cargar usuario desde la sesión o la cookie
-app.use(function(req, res, next) {
+app.use( async function(req, res, next) {
   if (req.session.usuario) {
     res.locals.usuario = req.session.usuario;
   } else if (req.cookies.userId && !req.session.usuario) {
