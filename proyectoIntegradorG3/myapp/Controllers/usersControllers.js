@@ -16,18 +16,26 @@ const usersControllers = {
       let errors = validationResult(req);
       if (errors.isEmpty()) {
         user.findOne({
-          where:{email: req.body.mail}
-        }).then(function(userFound){
-          req.session.usuario = userFound
-          if(req.body.recordarme != undefined){
-            res.cookie("recordarme", userFound.email, {maxAge:24*60*60*1000})
+          where: { mail: req.body.mail }
+        }).then(function (userFound) {
+          if (userFound) {
+            console.log("Usuario encontrado:", userFound);
+            req.session.usuario = userFound;
+            if (req.body.recordarme != undefined) {
+              res.cookie("recordarme", userFound.mail, { maxAge: 24 * 60 * 60 * 1000 });
+            }
+            return res.redirect("/");
+          } else {
+            console.log("Usuario no encontrado");
+            return res.render("login", { errors: [{ msg: "Usuario no encontrado" }] });
           }
-          return res.redirect("/");
-        }).catch(function (errors) {
-                console.log(errors);
-        })
-      }else{
-        return res.render("login", {errors: errors.mapped()})
+        }).catch(function (error) {
+          console.log("Error al buscar usuario:", error);
+          return res.render("login", { errors: [{ msg: "Error del servidor" }] });
+        });
+      } else {
+        console.log("Errores de validación:", errors.mapped());
+        return res.render("login", { errors: errors.mapped() });
       }
     },
 
@@ -112,7 +120,7 @@ const usersControllers = {
 
   // Procesar la edición de usuario
   usersEditPost: async function (req, res) {
-      const { email, username, password, fechaNacimiento, dni } = req.body;
+      const { mail, username, contrasenia, fechaNacimiento, dni } = req.body;
       const userId = req.session.usuario.id;
 
       try {
@@ -123,14 +131,14 @@ const usersControllers = {
           }
 
           // Actualizar los datos del usuario
-          usuario.mail = email;
+          usuario.mail = mail;
           usuario.usuario = username;
           usuario.fechaNacimiento = fechaNacimiento;
           usuario.numeroDocumento = dni;
 
           // Si se proporcionó una nueva contraseña, actualizarla
-          if (password) {
-              const hashedPassword = bcrypt.hashSync(password, 10);
+          if (contrasenia) {
+              const hashedPassword = bcrypt.hashSync(contrasenia, 10);
               usuario.contrasenia = hashedPassword;
           }
 

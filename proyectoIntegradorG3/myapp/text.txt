@@ -1,0 +1,19 @@
+    loginPost: function (req, res) {
+      user = db.Usuario;
+      let errors = validationResult(req);
+      if (errors.isEmpty()) {
+        user.findOne({
+          where:{mail: req.body.mail}
+        }).then(function(userFound){
+          req.session.usuario = userFound
+          if(req.body.recordarme != undefined){
+            res.cookie("recordarme", userFound.mail, {maxAge:24*60*60*1000})
+          }
+          return res.redirect("/");
+        }).catch(function (errors) {
+                console.log(errors);
+        })
+      }else{
+        return res.render("login", {errors: errors.mapped()})
+      }
+    },
