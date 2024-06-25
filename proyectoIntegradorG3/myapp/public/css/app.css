@@ -434,6 +434,12 @@ hr {
   font-size: 1.6em;
   margin: 10px 0;
 }
+.link-p {
+  display: inline-block;
+  font-size: 1.6em;
+  margin: 10px 0;
+  color: pink;
+}
 
 .form-input {
   display: block;

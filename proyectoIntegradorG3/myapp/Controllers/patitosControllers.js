@@ -75,23 +75,73 @@ const patitosControllers = {
     let id = req.params.id;
 
     if (!req.session.usuario) {
-        return res.render("product", {
+        return res.render("edit-product", {
             error: "No puedes editar este producto si no estás registrado.",
             loginLink: "/users/login"
         });
     }
 
     db.Patito.findByPk(id)
-    .then((producto) => {
-        if (!producto) {
-            return res.send("Producto no encontrado");
-        }
-        return res.render("edit-product", { producto });
-    })
-    .catch((err) => {
-        console.log(err);
-        return res.send("Error interno del servidor");
-    });
+        .then((producto) => {
+            if (!producto) {
+                return res.send("Producto no encontrado");
+            }
+            return res.render("edit-product", { producto });
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.send("Error interno del servidor");
+        });
+},
+update: function(req, res) {
+    let id = req.params.id;
+
+    if (!req.session.usuario) {
+        return res.render("edit-product", {
+            error: "No puedes actualizar este producto si no estás registrado.",
+            loginLink: "/users/login"
+        });
+    }
+
+    let form = {
+        producto: req.body.nombreProd,
+        descripcion: req.body.descripcion,
+        foto: req.body.imagenProd,
+        idUsuario: req.body.idUsuario
+    };
+
+    let errors = validationResult(req);
+    if(errors.isEmpty()) {
+        db.Patito.findByPk(id)
+            .then((producto) => {
+                if (!producto) {
+                    return res.send("Producto no encontrado");
+                }
+                return producto.update(form);
+            })
+            .then(() => {
+                return res.redirect("/patitos/id/" + id);
+            })
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).send("Error interno del servidor");
+            });
+    } else {
+        db.Usuario.findOne()
+            .then(function(results){
+                return res.render("edit-product", {
+                    title: "Editar Producto",
+                    producto: form,
+                    usuario: results,
+                    errors: errors.mapped(),
+                    old: req.body
+                });
+            })
+            .catch(function(err){
+                console.log(err);
+                return res.status(500).send("Error interno del servidor");
+            });
+    }
 },
 
 delete: function(req, res) {
