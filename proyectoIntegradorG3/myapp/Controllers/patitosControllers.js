@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const db = require("../database/models");
 
+// Controllers/patitosControllers.js
 const patitosControllers = {
     index: function(req, res){
         const id = req.params.id;
@@ -54,21 +55,14 @@ const patitosControllers = {
     },
 
   detalle: function(req, res) {
-    let idPatitos = req.params.idPatitos;
-  
-    db.Patito.findByPk(idPatitos, {
-        include: [{ association: "usuario" }, { association: "comentario" }]
+    let id = req.params.id;
+    db.Patito.findByPk(id, {
+        include: [{all: true, nested: true}]
     })
-    .then((result) => {
-        if (!result) {
-            return res.send("Producto no encontrado");
-        }
-        return res.render("product", { producto: result });
+    .then(function (elProducto) {
+        console.log(elProducto)
+        res.render("product", {producto: elProducto})
     })
-    .catch((err) => {
-        console.log(err);
-        return res.send("Error interno del servidor");
-    });
   },
 
   edit: function(req, res) {

@@ -17,14 +17,19 @@ const indexControllers = {
     },
 
     results : function (req, res) {
-       /* return res.render ('searchResults', {title: "Search Results", productos: db.productos}); */
-       db.Usuario.findOne()
-        .then(function(results){
-            return res.render('searchResults', {title:"Search Results", usuario: results});
+        let palabraBuscada = req.query.search;
+        let filtro= {
+            where:{
+                producto: {[db.Sequelize.Op.like]: '%'+ palabraBuscada + '%'}
+            }
+        };
+        db.Patito.findAll(filtro)
+        .then(function (results) {
+            res.render("searchResults", {resultados: results});
         })
-        .catch(function(respuestaNegativa){
-            console.log(respuestaNegativa);
-        });
+        .catch(function (err) {
+            console.log(err)
+        })
     }
 }
 

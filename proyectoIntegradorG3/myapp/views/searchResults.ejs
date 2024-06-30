@@ -22,20 +22,20 @@
 	<div class="container products-wrapper">
         <div class="row">
             <!-- Show the "ultimos" products -->
-            <%for (let index = 0; index < 10; index++) {%>
-                <div class="col-12 col-sm-6 col-lg-3">
+            <%for (let index = 0; index < resultados.length; index++) {%>
+                <li class="col-12 col-sm-6 col-lg-3">
                     <section class="product-box">
-                        <a href="/patitos">
-                            <img src=<%= productos[index].imagenProducto %>>
+                        <!-- <a href="/patitos/"> -->
+                            <img src=<%= resultados[index].foto %>>
                             </figure>
                             <article class="product-box_data">
-                                <h2><%= productos[index].nombre %></h2>
-                                <p><%= productos[index].descripcion %></p>
-                                <p>Comentarios: <%= productos[index].comentarios.length %></p>
+                                <h2><%= resultados[index].producto %></h2>
+                                <p><%= resultados[index].descripcion %></p>
+                                <!-- <p>Comentarios: <%= //resultados[index].comentarios %></p> -->
                             </article>
                         </a>
                     </section>
-                </div>
+                </li>
             <%}%>
         </div>
     </div>
